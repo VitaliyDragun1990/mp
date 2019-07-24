@@ -52,15 +52,15 @@ public class PhotoServiceBean implements PhotoService {
 
 	@Override
 	public List<Photo> findProfilePhotos(Long profileId, Pageable pageable) {
-		return photoRepository.findProfilePhotoLatestFirst(profileId, pageable.getOffset(), pageable.getLimit());
+		return photoRepository.findProfilePhotosLatestFirst(profileId, pageable.getOffset(), pageable.getLimit());
 	}
 
 	@Override
 	public List<Photo> findPopularPhotos(SortMode sortMode, Pageable pageable) {
 		switch (sortMode) {
-		case PHOTO_POPULARITY:
+		case POPULAR_AUTHOR:
 			return photoRepository.findAllOrderedByProfileRatingDesc(pageable.getOffset(), pageable.getLimit());
-		case AUTHOR_POPULARITY:
+		case POPULAR_PHOTO:
 			return photoRepository.findAllOrderedByViewsDesc(pageable.getOffset(), pageable.getLimit());
 		default:
 			throw new ValidationException("Unsupported sort mode: " + sortMode);

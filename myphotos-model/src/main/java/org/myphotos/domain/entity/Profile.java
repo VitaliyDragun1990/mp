@@ -111,6 +111,10 @@ public class Profile extends AbstractEntity<Long> {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 
 	public String getJobTitle() {
 		return jobTitle;

@@ -6,7 +6,7 @@ import org.myphotos.domain.entity.Photo;
 
 public interface PhotoRepository extends EntityRepository<Photo, Long> {
 
-	List<Photo> findProfilePhotoLatestFirst(Long profileId, int offset, int limit);
+	List<Photo> findProfilePhotosLatestFirst(Long profileId, int offset, int limit);
 	
 	int countProfilePhotos(Long profileId);
 	

@@ -4,12 +4,14 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-public class PrintAllDiscoveredBeansExtension implements Extension {
+@ApplicationScoped
+class PrintAllDiscoveredBeansExtension implements Extension {
 
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	

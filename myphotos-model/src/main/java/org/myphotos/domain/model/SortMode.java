@@ -10,9 +10,9 @@ import org.myphotos.infra.exception.business.ValidationException;
  */
 public enum SortMode {
 
-	PHOTO_POPULARITY,
+	POPULAR_PHOTO,
 	
-	AUTHOR_POPULARITY;
+	POPULAR_AUTHOR;
 	
 	public static SortMode of(String name) {
 		for (SortMode sortMode : SortMode.values()) {

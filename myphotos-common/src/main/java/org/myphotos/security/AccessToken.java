@@ -14,34 +14,25 @@ import org.myphotos.domain.entity.Profile;
 
 @Entity
 @Table(name="access_token", catalog = "myphotos", schema = "public")
-public class AccessToken extends AbstractEntity<String> {
+public class AccessToken extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull
 	@Id
-	@Column(name = "token", unique = true, nullable = false)
-	private String id;
+	@NotNull
+	@Column(unique = true, nullable = false)
+	private String token;
 	
 	@NotNull
 	@JoinColumn(name = "profile_id", referencedColumnName = "id", nullable = false)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Profile profile;
-
-	@Override
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
-	}
 	
 	public String getToken() {
-		return getId();
+		return token;
 	}
 	
 	public void setToken(String token) {
-		setId(token);
+		this.token = token;
 	}
 	
 	public Profile getProfile() {

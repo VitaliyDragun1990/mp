@@ -1,14 +1,17 @@
-package org.myphotos.ejb.repository.mock;
+package org.myphotos.infra.repository.inmemory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.enterprise.inject.Vetoed;
+
 import org.myphotos.domain.entity.Photo;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.util.CommonUtils;
 
+@Vetoed
 final class InMemoryDataBase {
 
 	public static final Profile PROFILE;

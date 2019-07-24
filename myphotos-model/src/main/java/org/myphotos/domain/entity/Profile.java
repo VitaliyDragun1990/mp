@@ -26,7 +26,7 @@ import org.myphotos.validation.EnglishLanguage;
 			@UniqueConstraint(columnNames = { "email" }),
 			@UniqueConstraint(columnNames = { "uid" }) }
 )
-public class Profile extends AbstractEntity<Long> {
+public class Profile extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -83,7 +83,6 @@ public class Profile extends AbstractEntity<Long> {
 	@Column(nullable = false)
 	private int rating;
 
-	@Override
 	public Long getId() {
 		return id;
 	}

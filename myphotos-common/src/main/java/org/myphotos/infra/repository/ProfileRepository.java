@@ -9,7 +9,7 @@ public interface ProfileRepository extends EntityRepository<Profile, Long> {
 
 	Optional<Profile> findByUid(String uid);
 	
-	Optional<Profile> findByEmial(String email);
+	Optional<Profile> findByEmail(String email);
 	
 	void updateRating();
 	

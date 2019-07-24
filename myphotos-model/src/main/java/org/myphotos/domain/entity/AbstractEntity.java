@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 
 import org.myphotos.converter.LocalDateTimeConverter;
@@ -14,16 +13,14 @@ import org.myphotos.infra.util.CommonUtils;
 import org.myphotos.validation.PastTime;
 
 @MappedSuperclass
-public abstract class AbstractEntity<T extends Serializable> implements Serializable {
+public abstract class AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull
 	@PastTime
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(nullable = false)
+	@Column(nullable = false, insertable = false)
 	private LocalDateTime created;
-
-	public abstract T getId();
 	
 	public LocalDateTime getCreated() {
 		return created;
@@ -31,13 +28,6 @@ public abstract class AbstractEntity<T extends Serializable> implements Serializ
 	
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		if (getId() == null) {
-			setCreated(LocalDateTime.now());
-		}
 	}
 	
 	@Override

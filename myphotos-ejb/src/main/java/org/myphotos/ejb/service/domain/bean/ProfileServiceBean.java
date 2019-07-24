@@ -57,7 +57,7 @@ public class ProfileServiceBean implements ProfileService {
 
 	@Override
 	public Optional<Profile> findByEmail(String email) {
-		return profileRepository.findByEmial(email);
+		return profileRepository.findByEmail(email);
 	}
 
 	@Override

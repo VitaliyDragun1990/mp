@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "photo", catalog = "myphotos", schema = "public")
-public class Photo extends AbstractEntity<Long> {
+public class Photo extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -53,7 +53,6 @@ public class Photo extends AbstractEntity<Long> {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Profile profile;
 	
-	@Override
 	public Long getId() {
 		return id;
 	}

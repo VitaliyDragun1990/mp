@@ -1,4 +1,4 @@
-package org.myphotos.ejb.repository.mock;
+package org.myphotos.infra.repository.inmemory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 
 import org.myphotos.infra.repository.AccessTokenRepository;
@@ -46,6 +47,7 @@ public class InMemoryRepositoryFactory {
 				new UnsupportedexceptionInvocationHandler());
 	}
 	
+	@Vetoed
 	private static class UnsupportedexceptionInvocationHandler implements InvocationHandler {
 
 		@Override

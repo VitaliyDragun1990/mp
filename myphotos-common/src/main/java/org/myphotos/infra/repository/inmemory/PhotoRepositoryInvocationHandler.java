@@ -1,16 +1,16 @@
-package org.myphotos.ejb.repository.mock;
+package org.myphotos.infra.repository.inmemory;
 
-import static org.myphotos.ejb.repository.mock.InMemoryDataBase.PHOTOS;
-import static org.myphotos.ejb.repository.mock.InMemoryDataBase.PROFILE;
+import static org.myphotos.infra.repository.inmemory.InMemoryDataBase.PHOTOS;
+import static org.myphotos.infra.repository.inmemory.InMemoryDataBase.PROFILE;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
-@Dependent
+@ApplicationScoped
 class PhotoRepositoryInvocationHandler implements InvocationHandler {
 
 	@Override

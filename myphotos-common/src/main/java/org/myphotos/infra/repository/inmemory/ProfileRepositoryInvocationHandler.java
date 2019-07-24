@@ -1,12 +1,12 @@
-package org.myphotos.ejb.repository.mock;
+package org.myphotos.infra.repository.inmemory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
-@Dependent
+@ApplicationScoped
 class ProfileRepositoryInvocationHandler implements InvocationHandler {
 
 	@Override

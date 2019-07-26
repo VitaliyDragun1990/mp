@@ -1,5 +1,8 @@
 package org.myphotos.infra.util;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.reflect.MethodUtils;
 
 /**
  * Contains general purpose utility functions
@@ -17,7 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  */
 public class CommonUtils {
-	
+
 	/**
 	 * Returns not-null unmodifiable copy of the source set
 	 */
@@ -37,6 +41,15 @@ public class CommonUtils {
 	 */
 	public static <K, V> Map<K, V> getSafeMap(Map<K, V> source) {
 		return Collections.unmodifiableMap(Optional.ofNullable(source).orElse(Collections.emptyMap()));
+	}
+
+	/**
+	 * Returns list of methods annotated with specified annotation or empty list if
+	 * no such methods was found
+	 * 
+	 */
+	public static List<Method> getMethodsWithAnnotation(Class<?> cls, Class<? extends Annotation> annotation) {
+		return Arrays.asList(MethodUtils.getMethodsWithAnnotation(cls, annotation));
 	}
 
 	/**

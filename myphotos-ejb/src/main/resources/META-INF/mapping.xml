@@ -8,7 +8,7 @@
 
 	<entity class="org.myphotos.security.AccessToken">
 		<entity-listeners>
-			<entity-listener class="org.myphotos.infra.repository.jpa.listener.AccessTokenLifeCycleManager">
+			<entity-listener class="org.myphotos.repository.jpa.listener.AccessTokenLifeCycleManager">
 			</entity-listener>
 		</entity-listeners>
 	</entity>

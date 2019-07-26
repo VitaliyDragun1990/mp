@@ -1,4 +1,4 @@
-package org.myphotos.infra.repository.inmemory;
+package org.myphotos.repository.inmemory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

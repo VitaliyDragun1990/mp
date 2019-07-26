@@ -1,4 +1,4 @@
-package org.myphotos.infra.repository.jpa;
+package org.myphotos.repository.jpa;
 
 import java.util.Optional;
 

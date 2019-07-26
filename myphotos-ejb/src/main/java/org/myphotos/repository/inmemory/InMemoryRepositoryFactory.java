@@ -1,4 +1,4 @@
-package org.myphotos.infra.repository.inmemory;
+package org.myphotos.repository.inmemory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -23,6 +23,7 @@ public class InMemoryRepositoryFactory {
 	private PhotoRepositoryInvocationHandler photoRepositoryInvocationHandler;
 	
 	@Produces
+	@InMemorySource
 	public ProfileRepository getProfileRepository() {
 		return (ProfileRepository) Proxy.newProxyInstance(
 				getClass().getClassLoader(),
@@ -31,6 +32,7 @@ public class InMemoryRepositoryFactory {
 	}
 	
 	@Produces
+	@InMemorySource
 	public PhotoRepository getPhotoRepository() {
 		return (PhotoRepository) Proxy.newProxyInstance(
 				getClass().getClassLoader(),
@@ -40,6 +42,7 @@ public class InMemoryRepositoryFactory {
 	}
 	
 	@Produces
+	@InMemorySource
 	public AccessTokenRepository getAccessTokenRepository() {
 		return (AccessTokenRepository) Proxy.newProxyInstance(
 				getClass().getClassLoader(),

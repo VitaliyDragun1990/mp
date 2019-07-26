@@ -1,4 +1,4 @@
-package org.myphotos.ejb.service.domain.bean;
+package org.myphotos.domain.service;
 
 import java.util.Optional;
 
@@ -17,6 +17,7 @@ import org.myphotos.domain.service.ProfileService;
 import org.myphotos.infra.cdi.annotation.Property;
 import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.repository.ProfileRepository;
+import org.myphotos.repository.jpa.DBSource;
 
 @Stateless
 @LocalBean
@@ -33,7 +34,7 @@ public class ProfileServiceBean implements ProfileService {
 	}
 	
 	@Inject
-	public void setProfileRepository(ProfileRepository profileRepository) {
+	public void setProfileRepository(@DBSource ProfileRepository profileRepository) {
 		this.profileRepository = profileRepository;
 	}
 

@@ -1,4 +1,4 @@
-package org.myphotos.infra.repository.jpa.listener;
+package org.myphotos.repository.jpa.listener;
 
 import java.util.UUID;
 import java.util.logging.Level;

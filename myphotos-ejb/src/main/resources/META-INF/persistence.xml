@@ -5,6 +5,7 @@
 	<persistence-unit name="org.myphotos.pu" transaction-type="JTA">
 		<jta-data-source>jdbc/MyPhotosDBPool</jta-data-source>
 		<mapping-file>META-INF/mapping.xml</mapping-file>
+		<class>org.myphotos.converter.LocalDateTimeConverter</class>
 		<class>org.myphotos.domain.entity.AbstractEntity</class>
 		<class>org.myphotos.security.AccessToken</class>
 		<class>org.myphotos.domain.entity.Profile</class>
@@ -13,6 +14,7 @@
 		<properties>
 			<property name="eclipselink.logging.level.sql" value="FINE"/>		
 			<property name="eclipselink.logging.parameters" value="true"/>
+			<property name="eclipselink.target-server" value="Glassfish"/>
 			
 			<property name="javax.persistence.validation.group.pre-persist" value="javax.validation.groups.Default"/>		
 			<property name="javax.persistence.validation.group.pre-update" value="javax.validation.groups.Default"/>		

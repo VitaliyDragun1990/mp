@@ -1,4 +1,4 @@
-package org.myphotos.ejb.service.domain.bean;
+package org.myphotos.domain.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,14 +17,14 @@ import org.myphotos.domain.entity.Photo;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.domain.model.AsyncOperation;
 import org.myphotos.domain.model.Image;
+import org.myphotos.domain.model.ImageResource;
 import org.myphotos.domain.model.Pageable;
 import org.myphotos.domain.model.SortMode;
-import org.myphotos.domain.model.ImageResource;
-import org.myphotos.domain.service.PhotoService;
 import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.exception.business.ValidationException;
 import org.myphotos.infra.repository.PhotoRepository;
 import org.myphotos.infra.repository.ProfileRepository;
+import org.myphotos.repository.jpa.DBSource;
 
 @Stateless
 @LocalBean
@@ -36,12 +36,12 @@ public class PhotoServiceBean implements PhotoService {
 	private SessionContext sessionContext;
 	
 	@Inject
-	void setPhotoRepository(PhotoRepository photoRepository) {
+	void setPhotoRepository(@DBSource PhotoRepository photoRepository) {
 		this.photoRepository = photoRepository;
 	}
 	
 	@Inject
-	void setProfileRepository(ProfileRepository profileRepository) {
+	void setProfileRepository(@DBSource ProfileRepository profileRepository) {
 		this.profileRepository = profileRepository;
 	}
 	

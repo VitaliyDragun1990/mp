@@ -1,4 +1,4 @@
-package org.myphotos.ejb.service.security.bean;
+package org.myphotos.security;
 
 import java.util.Optional;
 import java.util.logging.Level;

@@ -1,7 +1,7 @@
-package org.myphotos.infra.repository.inmemory;
+package org.myphotos.repository.inmemory;
 
-import static org.myphotos.infra.repository.inmemory.InMemoryDataBase.PHOTOS;
-import static org.myphotos.infra.repository.inmemory.InMemoryDataBase.PROFILE;
+import static org.myphotos.repository.inmemory.InMemoryDataBase.PHOTOS;
+import static org.myphotos.repository.inmemory.InMemoryDataBase.PROFILE;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -2,6 +2,7 @@ package org.myphotos.media;
 
 import javax.enterprise.inject.Vetoed;
 
+import org.myphotos.domain.entity.Photo;
 import org.myphotos.domain.model.Image;
 import org.myphotos.domain.model.ImageResource;
 
@@ -10,8 +11,10 @@ public interface ImageService {
 
 	Image downloadImage(String imageUrl);
 	
-	void uploadPhoto(ImageResource uploadedResource);
+	Photo uploadPhoto(ImageResource uploadedResource);
 
-	void uploadAvatar(ImageResource uploadedResource);
+	String uploadAvatar(ImageResource uploadedResource);
+	
+	void removeImage(String imageUrl);
 	
 }

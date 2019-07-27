@@ -1,4 +1,4 @@
-package org.myphotos.config;
+package org.myphotos.media.model;
 
 public enum ImageCategory {
 	

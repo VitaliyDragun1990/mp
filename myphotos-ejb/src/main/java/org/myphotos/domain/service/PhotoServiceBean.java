@@ -12,7 +12,9 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 
+import org.myphotos.cdi.interceptor.AsyncOperationInterceptor;
 import org.myphotos.domain.entity.Photo;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.domain.model.AsyncOperation;
@@ -24,6 +26,7 @@ import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.exception.business.ValidationException;
 import org.myphotos.infra.repository.PhotoRepository;
 import org.myphotos.infra.repository.ProfileRepository;
+import org.myphotos.media.ImageService;
 import org.myphotos.repository.jpa.DBSource;
 
 @Stateless
@@ -33,22 +36,8 @@ public class PhotoServiceBean implements PhotoService {
 	
 	private PhotoRepository photoRepository;
 	private ProfileRepository profileRepository;
+	private ImageService imageService;
 	private SessionContext sessionContext;
-	
-	@Inject
-	void setPhotoRepository(@DBSource PhotoRepository photoRepository) {
-		this.photoRepository = photoRepository;
-	}
-	
-	@Inject
-	void setProfileRepository(@DBSource ProfileRepository profileRepository) {
-		this.profileRepository = profileRepository;
-	}
-	
-	@Resource
-	void setSessionContext(SessionContext sessionContext) {
-		this.sessionContext = sessionContext;
-	}
 
 	@Override
 	public List<Photo> findProfilePhotos(Long profileId, Pageable pageable) {
@@ -94,20 +83,53 @@ public class PhotoServiceBean implements PhotoService {
 		photo.setDownloads(photo.getDownloads() + 1);
 		photoRepository.update(photo);
 		
-		throw new UnsupportedOperationException("implement me");
+		return imageService.downloadImage(photo.getOriginalUrl());
 	}
 
 	@Override
 	@Asynchronous
+	@Interceptors(AsyncOperationInterceptor.class)
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void uploadNewPhoto(Profile profile, ImageResource imageResource, AsyncOperation<Photo> callback) {
 		try {
-			Photo photo = null; // FIXME
+			Photo photo = uploadNewPhoto(profile, imageResource);
 			callback.onSuccess(photo);
 		} catch (Throwable th) {
 			sessionContext.setRollbackOnly();
 			callback.onFail(th);
 		}
+	}
+
+	public Photo uploadNewPhoto(Profile profile, ImageResource imageResource) {
+		Photo photo = imageService.uploadPhoto(imageResource);
+		photo.setProfile(profile);
+		photoRepository.create(photo);
+		photoRepository.flush();
+		
+		profile.setPhotoCount(photoRepository.countProfilePhotos(profile.getId()));
+		profileRepository.update(profile);
+		
+		return photo;
+	}
+
+	@Inject
+	void setPhotoRepository(@DBSource PhotoRepository photoRepository) {
+		this.photoRepository = photoRepository;
+	}
+	
+	@Inject
+	void setProfileRepository(@DBSource ProfileRepository profileRepository) {
+		this.profileRepository = profileRepository;
+	}
+	
+	@Inject
+	void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+	
+	@Resource
+	void setSessionContext(SessionContext sessionContext) {
+		this.sessionContext = sessionContext;
 	}
 
 }

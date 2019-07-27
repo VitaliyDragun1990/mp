@@ -2,6 +2,8 @@ package org.myphotos.repository.jpa.query;
 
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.myphotos.domain.entity.AbstractEntity;
+
 public class JPARepositoryInstance extends AnnotationLiteral<JPARepository> implements JPARepository {
 	private static final long serialVersionUID = 1L;
 	
@@ -11,7 +13,7 @@ public class JPARepositoryInstance extends AnnotationLiteral<JPARepository> impl
 
 	@Override
 	public Class<?> value() {
-		return null;
+		return AbstractEntity.class;
 	}
 
 }

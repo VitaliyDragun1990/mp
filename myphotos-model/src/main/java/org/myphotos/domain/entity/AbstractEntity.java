@@ -31,16 +31,6 @@ public abstract class AbstractEntity implements Serializable {
 	}
 	
 	@Override
-	public int hashCode() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		throw new UnsupportedOperationException();
-	}
-	
-	@Override
 	public String toString() {
 		return CommonUtils.toString(this);
 	}

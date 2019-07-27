@@ -57,7 +57,7 @@ public class ProfileServiceBean implements ProfileService {
 
 	@Override
 	public void create(Profile profile, boolean uploadProfileAvatar) {
-		throw new UnsupportedOperationException("implement this"); // TODO:
+		profileRepository.create(profile);
 	}
 
 	@Override

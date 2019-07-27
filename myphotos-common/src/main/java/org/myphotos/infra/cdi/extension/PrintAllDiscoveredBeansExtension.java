@@ -11,7 +11,7 @@ import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
 @ApplicationScoped
-class PrintAllDiscoveredBeansExtension implements Extension {
+public class PrintAllDiscoveredBeansExtension implements Extension {
 
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	

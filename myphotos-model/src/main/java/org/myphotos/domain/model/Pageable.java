@@ -11,12 +11,20 @@ import org.myphotos.infra.util.Checks;
 public class Pageable {
 	private final int page;
 	private final int limit;
+	
+	public static Pageable of(int limit) {
+		return new Pageable(limit);
+	}
+	
+	public static Pageable of(int page, int limit) {
+		return new Pageable(page, limit);
+	}
 
-	public Pageable(int limit) {
+	private Pageable(int limit) {
 		this(1, limit);
 	}
 
-	public Pageable(int page, int limit) {
+	private Pageable(int page, int limit) {
 		validateParams(page, limit);
 
 		this.page = page;

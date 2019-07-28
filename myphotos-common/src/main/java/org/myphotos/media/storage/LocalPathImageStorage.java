@@ -43,14 +43,14 @@ class LocalPathImageStorage implements ImageStorage {
 	@Override
 	public String saveOriginalImage(Path path) {
 		String fileName = fileNameGenerator.generateUniqueFileName();
-		Path destinationPath = Paths.get(storageRoot + fileName);
+		Path destinationPath = Paths.get(storageRoot, fileName);
 		saveImage(path, destinationPath);
 		return fileName;
 	}
 
 	@Override
 	public Image getOriginalImage(String originalImageName) {
-		Path originalPath = Paths.get(storageRoot + originalImageName);
+		Path originalPath = Paths.get(storageRoot, originalImageName);
 		try {
 			return new Image(
 					Files.newInputStream(originalPath),
@@ -64,14 +64,14 @@ class LocalPathImageStorage implements ImageStorage {
 	@Override
 	public String savePublicImage(Path path, ImageCategory imageCategory) {
 		String fileName = fileNameGenerator.generateUniqueFileName();
-		Path destinationPath = Paths.get(mediaRoot + imageCategory.getRelativeRoot() + fileName);
+		Path destinationPath = Paths.get(mediaRoot, imageCategory.getRelativeRoot(), fileName);
 		saveImage(path, destinationPath);
 		return "/" + imageCategory.getRelativeRoot() + fileName;
 	}
 
 	@Override
 	public void deletePublicImage(String url) {
-		Path destinationPath = Paths.get(mediaRoot + url.substring(1));
+		Path destinationPath = Paths.get(mediaRoot, url.substring(1));
 		try {
 			Files.deleteIfExists(destinationPath);
 		} catch (IOException | RuntimeException e) {

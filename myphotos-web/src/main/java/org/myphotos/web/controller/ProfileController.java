@@ -57,7 +57,7 @@ public class ProfileController extends HttpServlet {
 	
 	private void handleHomeRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		SortMode sortMode = getSortMode(req);
-		List<Photo> photos = photoService.findPopularPhotos(sortMode, new Pageable(1, PHOTO_LIMIT));
+		List<Photo> photos = photoService.findPopularPhotos(sortMode, Pageable.of(1, PHOTO_LIMIT));
 		long totalCount = photoService.countAllPhotos();
 		
 		req.setAttribute("photos", photos);
@@ -70,7 +70,7 @@ public class ProfileController extends HttpServlet {
 	private void handleProfileRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid = req.getRequestURI().substring(1);
 		Profile profile = profileService.findByUid(uid);
-		List<Photo> photos = photoService.findProfilePhotos(profile.getId(), new Pageable(1, PHOTO_LIMIT));
+		List<Photo> photos = photoService.findProfilePhotos(profile.getId(), Pageable.of(1, PHOTO_LIMIT));
 		
 		req.setAttribute("profile", profile);
 		req.setAttribute("profilePhotos", Boolean.TRUE);

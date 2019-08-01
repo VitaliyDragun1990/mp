@@ -3,10 +3,9 @@ package org.myphotos.infra.gateway.social;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.myphotos.converter.TranslitConverter;
-import org.myphotos.infra.cdi.annotation.Property;
-import org.myphotos.infra.cdi.annotation.SocialProvider;
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.Property;
+import org.myphotos.infra.cdi.qualifier.SocialProvider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 import org.myphotos.infra.gateway.social.exception.SocialNetworkGatewayException;
 import org.myphotos.infra.gateway.social.model.SocialNetworkAccount;
 
@@ -39,9 +38,6 @@ class FacebookGateway implements SocialNetworkGateway {
 	@Inject
 	@Property("myphotos.social.facebook.redirectUrl")
 	private String redirectUrl;
-	
-	@Inject
-	private TranslitConverter translitConverter;
 
 	@Override
 	public String getAuthorizeUrl() {
@@ -75,8 +71,8 @@ class FacebookGateway implements SocialNetworkGateway {
 
 	private SocialNetworkAccount buildSocialNetworkAccount(User user, String avatarUrl) {
 		return new SocialNetworkAccount(
-				translitConverter.translit(user.getFirstName()),
-				translitConverter.translit(user.getLastName()),
+				user.getFirstName(),
+				user.getLastName(),
 				user.getEmail(),
 				avatarUrl
 				);
@@ -100,10 +96,6 @@ class FacebookGateway implements SocialNetworkGateway {
 
 	void setRedirectUrl(String redirectUrl) {
 		this.redirectUrl = redirectUrl;
-	}
-
-	void setTranslitConverter(TranslitConverter translitConverter) {
-		this.translitConverter = translitConverter;
 	}
 	
 }

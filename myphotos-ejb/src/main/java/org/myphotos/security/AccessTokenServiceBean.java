@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.repository.AccessTokenRepository;
 import org.myphotos.repository.jpa.DBSource;
+import org.myphotos.security.AccessTokenService;
 import org.myphotos.security.exception.AccessForbiddenException;
 import org.myphotos.security.exception.InvalidAccessTokenException;
 import org.myphotos.security.model.AccessToken;

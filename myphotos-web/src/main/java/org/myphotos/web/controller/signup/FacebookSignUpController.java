@@ -2,7 +2,7 @@ package org.myphotos.web.controller.signup;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 
 @WebServlet(urlPatterns = "/from/facebook", loadOnStartup = 1)
 public class FacebookSignUpController extends AbstractSignUpController {

@@ -20,6 +20,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<commons-io.version>2.6</commons-io.version>
+		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 	</properties>
 
 	<dependencies>
@@ -49,6 +50,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

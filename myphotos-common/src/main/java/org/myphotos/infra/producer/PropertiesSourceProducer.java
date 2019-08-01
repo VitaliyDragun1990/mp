@@ -8,7 +8,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
-import org.myphotos.infra.cdi.annotation.PropertiesSource;
+import org.myphotos.infra.cdi.qualifier.PropertiesSource;
 import org.myphotos.infra.resource.ResourceLoaderManager;
 
 @Dependent

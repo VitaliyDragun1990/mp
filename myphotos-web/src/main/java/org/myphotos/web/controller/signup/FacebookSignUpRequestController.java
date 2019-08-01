@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.myphotos.infra.cdi.annotation.SocialProvider;
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 import org.myphotos.social.SocialService;
 import org.myphotos.web.router.Router;
 

@@ -26,10 +26,10 @@ import org.myphotos.validation.validator.EnglishLanguageConstraintValidator;
 @Documented
 @Retention(RUNTIME)
 @Target({ FIELD, METHOD, PARAMETER, CONSTRUCTOR, ANNOTATION_TYPE })
-@Constraint(validatedBy = { EnglishLanguageConstraintValidator.class })
+@Constraint(validatedBy = EnglishLanguageConstraintValidator.class)
 public @interface EnglishLanguage {
 
-	String message() default "javax.validation.constraints.EnglishLanguage.message";
+	String message() default "{javax.validation.constraints.EnglishLanguage.message}";
 
 	// 0123456789
 	boolean withNumbers() default true;

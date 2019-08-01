@@ -12,7 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.myphotos.domain.model.Image;
-import org.myphotos.infra.cdi.annotation.Property;
+import org.myphotos.infra.cdi.qualifier.Property;
 import org.myphotos.media.generator.ImageFileNameGenerator;
 import org.myphotos.media.model.ImageCategory;
 import org.myphotos.media.storage.exception.ImageStorageException;

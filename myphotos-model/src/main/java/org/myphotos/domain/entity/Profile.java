@@ -64,13 +64,13 @@ public class Profile extends AbstractEntity {
 	private String lastName;
 	
 	@NotNull(message = "{Profile.jobTitle.NotNull}")
-	@Size(min = 1, max = 100, message = "{Profile.jobTitle.Size}")
+	@Size(min = 5, max = 100, message = "{Profile.jobTitle.Size}")
 	@EnglishLanguage(withSpecSymbols = false)
 	@Column(name = "job_title", nullable = false, length = 100)
 	private String jobTitle;
 
 	@NotNull(message = "{Profile.location.NotNull}")
-	@Size(min = 1, max = 100, message = "{Profile.location.Size}")
+	@Size(min = 5, max = 100, message = "{Profile.location.Size}")
 	@EnglishLanguage(withSpecSymbols = false)
 	@Column(nullable = false, length = 100)
 	private String location;

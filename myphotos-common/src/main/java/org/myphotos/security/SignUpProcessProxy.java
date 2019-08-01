@@ -11,7 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 import org.myphotos.domain.entity.Profile;
-import org.myphotos.infra.cdi.annotation.SessionProxy;
+import org.myphotos.infra.cdi.qualifier.SessionProxy;
 import org.myphotos.infra.exception.business.InvalidWorkFlowException;
 
 @SessionScoped

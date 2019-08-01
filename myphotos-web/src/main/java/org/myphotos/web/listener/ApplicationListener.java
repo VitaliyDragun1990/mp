@@ -7,7 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.myphotos.infra.cdi.annotation.Property;
+import org.myphotos.infra.cdi.qualifier.Property;
 
 @WebListener
 public class ApplicationListener implements ServletContextListener {

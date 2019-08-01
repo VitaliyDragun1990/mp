@@ -5,7 +5,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
-import org.myphotos.infra.cdi.annotation.Property;
+import org.myphotos.infra.cdi.qualifier.Property;
 import org.myphotos.infra.exception.ConfigurationException;
 
 @Dependent

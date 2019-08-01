@@ -1,4 +1,4 @@
-package org.myphotos.infra.cdi.annotation;
+package org.myphotos.infra.cdi.qualifier;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

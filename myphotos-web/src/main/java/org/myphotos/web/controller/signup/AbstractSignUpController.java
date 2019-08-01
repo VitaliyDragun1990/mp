@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.myphotos.domain.entity.Profile;
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 import org.myphotos.security.SignUpProcessManager;
 import org.myphotos.web.router.Router;
 
@@ -36,7 +36,7 @@ abstract class AbstractSignUpController extends HttpServlet {
 	}
 
 	private void processSignUp(String code, HttpServletResponse resp) throws IOException {
-		Optional<Profile> profileOptional = signUpProcessManager.signUp(code, getProvider());
+		Optional<Profile> profileOptional = signUpProcessManager.tryToSignUp(code, getProvider());
 		if (profileOptional.isPresent()) {
 			Profile profile = profileOptional.get();
 			// TODO: Authenticate ???

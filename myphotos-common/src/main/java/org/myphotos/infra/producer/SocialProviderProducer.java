@@ -8,8 +8,8 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Vetoed;
 import javax.enterprise.util.AnnotationLiteral;
 
-import org.myphotos.infra.cdi.annotation.SocialProvider;
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 
 @Dependent
 public class SocialProviderProducer {

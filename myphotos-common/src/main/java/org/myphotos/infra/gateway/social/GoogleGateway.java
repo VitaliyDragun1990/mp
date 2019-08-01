@@ -9,10 +9,9 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.myphotos.converter.TranslitConverter;
-import org.myphotos.infra.cdi.annotation.Property;
-import org.myphotos.infra.cdi.annotation.SocialProvider;
-import org.myphotos.infra.cdi.annotation.SocialProvider.Provider;
+import org.myphotos.infra.cdi.qualifier.Property;
+import org.myphotos.infra.cdi.qualifier.SocialProvider;
+import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 import org.myphotos.infra.gateway.social.exception.SocialNetworkGatewayException;
 import org.myphotos.infra.gateway.social.model.SocialNetworkAccount;
 import org.myphotos.infra.util.CommonUtils;
@@ -29,7 +28,6 @@ class GoogleGateway implements SocialNetworkGateway {
 	
 	private String clientId;
 	private List<String> issuers;
-	private TranslitConverter translitConverter;
 
 	@Override
 	public SocialNetworkAccount getSocialNetworkAccount(String authToken) {
@@ -46,8 +44,8 @@ class GoogleGateway implements SocialNetworkGateway {
 		if (idToken != null) {
 			Payload payload = idToken.getPayload();
 			return new SocialNetworkAccount(
-					translitConverter.translit((String) payload.get("given_name")),
-					translitConverter.translit((String) payload.get("family_name")),
+					(String) payload.get("given_name"),
+					(String) payload.get("family_name"),
 					payload.getEmail(),
 					(String) payload.get("picture"));
 		} else {
@@ -70,11 +68,6 @@ class GoogleGateway implements SocialNetworkGateway {
 	@Inject
 	void setIssuers(@Property("myphotos.social.google-plus.issuers") String issuers) {
 		this.issuers = CommonUtils.getSafeList(Arrays.asList(issuers.split(",")));
-	}
-	
-	@Inject
-	void setTranslitConverter(TranslitConverter translitConverter) {
-		this.translitConverter = translitConverter;
 	}
 
 }

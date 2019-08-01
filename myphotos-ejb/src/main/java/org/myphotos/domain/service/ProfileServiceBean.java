@@ -1,6 +1,8 @@
 package org.myphotos.domain.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.ejb.Asynchronous;
 import javax.ejb.Local;
@@ -15,12 +17,13 @@ import org.myphotos.cdi.interceptor.AsyncOperationInterceptor;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.domain.model.AsyncOperation;
 import org.myphotos.domain.model.ImageResource;
-import org.myphotos.domain.service.ProfileService;
-import org.myphotos.infra.cdi.annotation.Property;
+import org.myphotos.generator.ProfileUidManager;
+import org.myphotos.infra.cdi.qualifier.Property;
 import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.repository.ProfileRepository;
 import org.myphotos.media.ImageService;
 import org.myphotos.media.model.ImageCategory;
+import org.myphotos.media.model.URLImageResource;
 import org.myphotos.repository.jpa.DBSource;
 
 @Stateless
@@ -31,6 +34,7 @@ public class ProfileServiceBean implements ProfileService {
 	private String avatarPlaceholderUrl;
 	private ProfileRepository profileRepository;
 	private ImageService imageService;
+	private ProfileUidManager uidManager;
 
 	@Override
 	public Profile findById(Long id) throws ObjectNotFoundException {
@@ -57,7 +61,11 @@ public class ProfileServiceBean implements ProfileService {
 
 	@Override
 	public void create(Profile profile, boolean uploadProfileAvatar) {
+		setProfileUidIfAbsent(profile);
 		profileRepository.create(profile);
+		if (uploadProfileAvatar && profile.getAvatarUrl() != null) {
+			uploadNewAvatar(profile, new URLImageResource(profile.getAvatarUrl()));
+		}
 	}
 
 	@Override
@@ -109,6 +117,24 @@ public class ProfileServiceBean implements ProfileService {
 			profileRepository.update(profile);
 		}
 	}
+	
+	private void setProfileUidIfAbsent(Profile profile) {
+		if (profile.getUid() == null) {
+			profile.setUid(generateUid(profile.getFirstName(), profile.getLastName()));
+		}
+	}
+	
+	private String generateUid(String firstName, String lastName) {
+		return generateCustomUid(firstName, lastName).orElse(uidManager.getDefaultUid());
+	}
+	
+	private Optional<String> generateCustomUid(String firstName, String lastName) {
+		List<String> uids = uidManager.getProfileUidCandidates(firstName, lastName);
+		List<String> occupiedUids = profileRepository.findUids(uids);
+		uids = uids.stream().filter(uid -> !occupiedUids.contains(uid)).collect(Collectors.toList());
+		
+		return uids.isEmpty() ? Optional.empty() : Optional.of(uids.get(0));
+	}
 
 	@Inject
 	void setAvatarPlaceholderUrl(
@@ -124,6 +150,11 @@ public class ProfileServiceBean implements ProfileService {
 	@Inject
 	void setImageService(ImageService imageService) {
 		this.imageService = imageService;
+	}
+	
+	@Inject
+	void setUidManager(ProfileUidManager uidManager) {
+		this.uidManager = uidManager;
 	}
 
 }

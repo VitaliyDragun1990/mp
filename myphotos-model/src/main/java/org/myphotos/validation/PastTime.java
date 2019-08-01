@@ -22,7 +22,7 @@ import org.myphotos.validation.validator.PastTimeConstraintValidator;
 @Constraint(validatedBy = {PastTimeConstraintValidator.class})
 public @interface PastTime {
 
-	String message() default "{javax.validation.constraints.Past.message}";
+	String message() default "{javax.validation.constraints.PastTime.message}";
 
 	Class<?>[] groups() default { };
 

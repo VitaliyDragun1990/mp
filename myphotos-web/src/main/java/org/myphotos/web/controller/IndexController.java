@@ -25,7 +25,7 @@ import org.myphotos.infra.util.CommonUtils;
 import org.myphotos.web.router.Router;
 
 @WebServlet(urlPatterns = "/", loadOnStartup = 1)
-public class ProfileController extends HttpServlet {
+public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final List<String> homeUrls;
@@ -37,7 +37,7 @@ public class ProfileController extends HttpServlet {
 	@Inject
 	private Router router;
 	
-	public ProfileController() {
+	public IndexController() {
 		this.homeUrls = CommonUtils.getSafeList(Arrays.asList("/"));
 	}
 	

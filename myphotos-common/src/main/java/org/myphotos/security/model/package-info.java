@@ -1,4 +1,4 @@
 @Vetoed
-package org.myphotos.social;
+package org.myphotos.security.model;
 
 import javax.enterprise.inject.Vetoed;

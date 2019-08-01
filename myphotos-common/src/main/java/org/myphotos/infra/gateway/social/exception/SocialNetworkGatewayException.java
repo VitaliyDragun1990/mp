@@ -10,6 +10,10 @@ import org.myphotos.infra.exception.base.ApplicationException;
  */
 public class SocialNetworkGatewayException extends ApplicationException {
 	private static final long serialVersionUID = 1L;
+	
+	public SocialNetworkGatewayException(String message) {
+		super(message);
+	}
 
 	public SocialNetworkGatewayException(String message, Throwable cause) {
 		super(message, cause);

@@ -1,4 +1,4 @@
-package org.myphotos.web.controller;
+package org.myphotos.web.controller.photo;
 
 import java.io.IOException;
 

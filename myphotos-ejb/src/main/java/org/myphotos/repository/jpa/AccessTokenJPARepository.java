@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 import org.myphotos.infra.repository.AccessTokenRepository;
 import org.myphotos.repository.jpa.query.JPAQuery;
 import org.myphotos.repository.jpa.query.JPARepository;
-import org.myphotos.security.AccessToken;
+import org.myphotos.security.model.AccessToken;
 
 @JPARepository(AccessToken.class)
 @DBSource

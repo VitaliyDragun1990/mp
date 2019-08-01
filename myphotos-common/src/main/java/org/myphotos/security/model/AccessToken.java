@@ -1,4 +1,4 @@
-package org.myphotos.security;
+package org.myphotos.security.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

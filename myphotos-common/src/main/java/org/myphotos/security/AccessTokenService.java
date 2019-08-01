@@ -1,8 +1,11 @@
 package org.myphotos.security;
 
+import javax.enterprise.inject.Vetoed;
+
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.security.exception.AccessForbiddenException;
 import org.myphotos.security.exception.InvalidAccessTokenException;
+import org.myphotos.security.model.AccessToken;
 
 /**
  * Contains access token related functionality.
@@ -10,6 +13,7 @@ import org.myphotos.security.exception.InvalidAccessTokenException;
  * @author Vitaliy Dragun
  *
  */
+@Vetoed
 public interface AccessTokenService {
 
 	/**

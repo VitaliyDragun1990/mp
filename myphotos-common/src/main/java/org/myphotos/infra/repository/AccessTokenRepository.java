@@ -2,7 +2,7 @@ package org.myphotos.infra.repository;
 
 import java.util.Optional;
 
-import org.myphotos.security.AccessToken;
+import org.myphotos.security.model.AccessToken;
 
 public interface AccessTokenRepository extends EntityRepository<AccessToken, String> {
 

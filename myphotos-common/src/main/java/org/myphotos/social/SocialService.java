@@ -1,5 +1,7 @@
 package org.myphotos.social;
 
+import javax.enterprise.inject.Vetoed;
+
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.social.exception.SocialDataRetrievingException;
 
@@ -9,6 +11,7 @@ import org.myphotos.social.exception.SocialDataRetrievingException;
  * @author Vitaliy Dragun
  *
  */
+@Vetoed
 public interface SocialService {
 
 	/**

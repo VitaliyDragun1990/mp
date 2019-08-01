@@ -9,7 +9,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.myphotos.infra.exception.business.InvalidWorkFlowException;
-import org.myphotos.security.AccessToken;
+import org.myphotos.security.model.AccessToken;
 
 public class AccessTokenLifeCycleManager {
 

@@ -7,7 +7,7 @@
 		<mapping-file>META-INF/mapping.xml</mapping-file>
 		<class>org.myphotos.converter.LocalDateTimeConverter</class>
 		<class>org.myphotos.domain.entity.AbstractEntity</class>
-		<class>org.myphotos.security.AccessToken</class>
+		<class>org.myphotos.security.model.AccessToken</class>
 		<class>org.myphotos.domain.entity.Profile</class>
 		<class>org.myphotos.domain.entity.Photo</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>

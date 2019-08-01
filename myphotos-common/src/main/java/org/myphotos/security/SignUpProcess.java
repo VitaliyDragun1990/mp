@@ -1,15 +1,18 @@
 package org.myphotos.security;
 
+import javax.enterprise.inject.Vetoed;
+
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.exception.business.ObjectNotFoundException;
 
 /**
- * Service that provides sign-up logic.
+ * Represents sign-up process.
  * 
  * @author Vitaliy Dragun
  *
  */
-public interface SignUpService {
+@Vetoed
+public interface SignUpProcess {
 
 	/**
 	 * Starts sign up process for new application user
@@ -24,7 +27,7 @@ public interface SignUpService {
 	 * @throws ObjectNotFoundException if no profile taking part in the sign up
 	 *                                 process found.
 	 */
-	Profile getCurrentProfile() throws ObjectNotFoundException;
+	Profile getSignUpProfile() throws ObjectNotFoundException;
 
 	/**
 	 * Completes sign up process, persisting new profile in the data storage.

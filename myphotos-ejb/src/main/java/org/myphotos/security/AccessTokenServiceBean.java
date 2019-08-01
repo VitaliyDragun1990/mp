@@ -10,10 +10,10 @@ import javax.inject.Inject;
 
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.repository.AccessTokenRepository;
-import org.myphotos.security.AccessToken;
-import org.myphotos.security.AccessTokenService;
+import org.myphotos.repository.jpa.DBSource;
 import org.myphotos.security.exception.AccessForbiddenException;
 import org.myphotos.security.exception.InvalidAccessTokenException;
+import org.myphotos.security.model.AccessToken;
 
 @Stateless
 @Local(AccessTokenService.class)
@@ -27,7 +27,7 @@ public class AccessTokenServiceBean implements AccessTokenService {
 	}
 	
 	@Inject
-	public void setAccessTokenRepository(AccessTokenRepository accessTokenRepository) {
+	public void setAccessTokenRepository(@DBSource AccessTokenRepository accessTokenRepository) {
 		this.accessTokenRepository = accessTokenRepository;
 	}
 

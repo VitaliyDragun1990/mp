@@ -3,12 +3,15 @@ package org.myphotos.web.router;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.function.Supplier;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.myphotos.web.security.SecurityUtils;
 
 @ApplicationScoped
 class RouterImpl implements Router {
@@ -33,6 +36,16 @@ class RouterImpl implements Router {
 	@Override
 	public void redirectToUrl(String url, HttpServletResponse response) throws IOException {
 		response.sendRedirect(url);
+	}
+	
+	@Override
+	public void redirectToAuthUrl(String tempAuthUrl, Supplier<String> authUrlSupplier, HttpServletResponse response)
+			throws IOException {
+		if (SecurityUtils.isTempAuthenticated()) {
+			redirectToUrl(tempAuthUrl, response);
+		} else {
+			redirectToUrl(authUrlSupplier.get(), response);
+		}
 	}
 
 	@Override

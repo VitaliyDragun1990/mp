@@ -13,6 +13,7 @@ import org.myphotos.infra.cdi.qualifier.SocialProvider;
 import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 import org.myphotos.social.SocialService;
 import org.myphotos.web.router.Router;
+import org.myphotos.web.security.SecurityUtils;
 
 @WebServlet(urlPatterns = "/sign-up/facebook", loadOnStartup = 1)
 public class FacebookSignUpRequestController extends HttpServlet {
@@ -23,9 +24,13 @@ public class FacebookSignUpRequestController extends HttpServlet {
 	private SocialService socialService;
 	@Inject
 	private Router router;
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		router.redirectToUrl(socialService.getAuthorizeUrl(), resp);
+		if (SecurityUtils.isAuthenticated()) {
+			router.redirectToAuthUrl("/sign-up", () -> "/" + SecurityUtils.getAuthenticatedProfile().getUid(), resp);
+		} else {
+			router.redirectToUrl(socialService.getAuthorizeUrl(), resp);
+		}
 	}
 }

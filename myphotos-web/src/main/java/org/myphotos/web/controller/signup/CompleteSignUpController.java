@@ -2,18 +2,20 @@ package org.myphotos.web.controller.signup;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
 
 import org.myphotos.domain.entity.Profile;
-import org.myphotos.security.SignUpProcessManager;
+import org.myphotos.security.SecurityManager;
 import org.myphotos.validation.group.SignUpGroup;
 import org.myphotos.web.controller.AbstractSaveProfileController;
+import org.myphotos.web.security.SecurityUtils;
 
 @WebServlet(urlPatterns = "/sign-up/complete", loadOnStartup = 1)
 public class CompleteSignUpController extends AbstractSaveProfileController {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private SignUpProcessManager signUpProcessManager;
+	private SecurityManager securityManager;
 
 	@Override
 	protected Class<?>[] getValidationGroups() {
@@ -26,18 +28,20 @@ public class CompleteSignUpController extends AbstractSaveProfileController {
 	}
 
 	@Override
-	protected Profile getCurrentProfile() {
-		return signUpProcessManager.getSignUpProfile();
+	protected Profile getCurrentProfile(HttpServletRequest req) {
+		return (Profile) req.getSession().getAttribute("signUpProfile");
 	}
 
 	@Override
-	protected void saveProfile(Profile profile) {
-		signUpProcessManager.completeActiveSignUp();
+	protected void saveProfile(HttpServletRequest req, Profile profile) {
+		securityManager.completeActiveSignUp();
+		req.getSession().removeAttribute("signUpProfile");
 		reloginWithUserRole(profile);
 	}
 
 	private void reloginWithUserRole(Profile profile) {
-		// TODO move this functionality to SignUpProcessManager
+		SecurityUtils.logout();
+		SecurityUtils.authenticate(profile);
 	}
 
 }

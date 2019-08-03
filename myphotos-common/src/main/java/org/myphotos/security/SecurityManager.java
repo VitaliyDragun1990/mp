@@ -16,21 +16,35 @@ import org.myphotos.infra.exception.business.ObjectNotFoundException;
  *
  */
 @Vetoed
-public interface SignUpProcessManager {
+public interface SecurityManager {
 
 	/**
-	 * Tries to sign up a user using specified {@code authCode} and given social
-	 * network {@code provider}. If no registered {@link Profile} was found for
-	 * specified user's {@code authCode} parameter, then new sign-up process
-	 * instance of {@link SignUpProcess} will be started.
+	 * Tries to sign in using specified {@code token} and given
+	 * social network {@code provider}.
 	 * 
-	 * @param authToken authentication token to authenticate user
+	 * @param token token to provide user sign in
 	 * @param provider  {@link Provider} that denotes some kind of social network
 	 *                  provider
 	 * @return {@link Optional} containing authenticated user's {@link Profile}, or
 	 *         empty one if there is no registered profile fo such user.
 	 */
-	Optional<Profile> tryToSignUp(String authToken, Provider provider);
+	Optional<Profile> signIn(String token, Provider provider);
+
+	/**
+	 * Tries to start new sign up process to register a new user using specified
+	 * {@code token} and given social network {@code provider}. This method
+	 * doesn't provide cmpleted signup capability, it only starts sign up process an
+	 * populate new {@link Profile} instance with data fetched from social network
+	 * provider. To complete sign up process {@link #completeActiveSignUp()} must be
+	 * called.
+	 * 
+	 * @param token token to provide sign up for new user
+	 * @param provider  {@link Provider} that denotes some kind of social network
+	 *                  provider
+	 * @return {@link Profile} partially populated profile instance with information
+	 *         fetched from social network provider
+	 */
+	Profile startSignUp(String token, Provider provider);
 
 	/**
 	 * Returns profile that currently takes part in the active sign up process.

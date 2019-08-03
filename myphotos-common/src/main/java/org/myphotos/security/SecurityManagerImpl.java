@@ -19,7 +19,7 @@ import org.myphotos.security.exception.SignUpProcessException;
 import org.myphotos.social.SocialService;
 
 @ApplicationScoped
-class SignUpProcessManagerImpl implements SignUpProcessManager {
+class SecurityManagerImpl implements SecurityManager {
 
 	@Inject
 	private Map<Provider, AnnotationLiteral<SocialProvider>> socialProviderRegistry;
@@ -36,17 +36,24 @@ class SignUpProcessManagerImpl implements SignUpProcessManager {
 	private SignUpProcess signUpProcess;
 
 	@Override
-	public Optional<Profile> tryToSignUp(String authToken, Provider provider) {
+	public Optional<Profile> signIn(String authToken, Provider provider) {
+		SocialService socialService = getAppropriateSocialService(provider);
+		Profile socialProfile = socialService.fetchProfile(authToken);
+		return profileService.findByEmail(socialProfile.getEmail());
+	}
+
+	@Override
+	public Profile startSignUp(String authToken, Provider provider) {
 		SocialService socialService = getAppropriateSocialService(provider);
 		Profile socialProfile = socialService.fetchProfile(authToken);
 		Optional<Profile> registeredProfile = profileService.findByEmail(socialProfile.getEmail());
 		if (registeredProfile.isPresent()) {
-			// TODO: authenticate registered profile
-		} else {
-			// TODO: authenticate social profile ???
-			signUpProcess.startSignUp(socialProfile);
+			throw new SignUpProcessException(
+					"Can't start sign up process for specified token: there is registered profile"
+							+ "for this token already. Please use it to authenticate instead");
 		}
-		return registeredProfile;
+		signUpProcess.startSignUp(socialProfile);
+		return socialProfile;
 	}
 
 	@Override

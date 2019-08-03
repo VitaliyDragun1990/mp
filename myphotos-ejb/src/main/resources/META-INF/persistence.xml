@@ -11,6 +11,7 @@
 		<class>org.myphotos.domain.entity.Profile</class>
 		<class>org.myphotos.domain.entity.Photo</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.logging.level.sql" value="FINE"/>		
 			<property name="eclipselink.logging.parameters" value="true"/>

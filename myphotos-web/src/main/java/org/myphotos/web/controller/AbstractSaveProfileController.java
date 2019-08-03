@@ -43,7 +43,7 @@ public abstract class AbstractSaveProfileController extends HttpServlet {
 		ProfileForm form = formReader.readForm(req, ProfileForm.class);
 		Set<ConstraintViolation<ProfileForm>> violations = validator.validate(form, getValidationGroups());
 		if (violations.isEmpty()) {
-			saveChanges(form, resp);
+			saveChanges(form, req, resp);
 		} else {
 			backToEditPage(req, form, violations, resp);
 		}
@@ -60,15 +60,15 @@ public abstract class AbstractSaveProfileController extends HttpServlet {
 
 	protected abstract String getBackToEditView();
 	
-	private void saveChanges(ProfileForm form, HttpServletResponse resp) throws IOException {
-		Profile profile = getCurrentProfile();
+	private void saveChanges(ProfileForm form, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Profile profile = getCurrentProfile(req);
 		form.copyToProfile(profile);
-		saveProfile(profile);
+		saveProfile(req, profile);
 		
 		router.redirectToUrl("/" + profile.getUid(), resp);
 	}
 
-	protected abstract Profile getCurrentProfile();
+	protected abstract Profile getCurrentProfile(HttpServletRequest req);
 	
-	protected abstract void saveProfile(Profile profile);
+	protected abstract void saveProfile(HttpServletRequest req, Profile profile);
 }

@@ -23,59 +23,68 @@ import org.myphotos.domain.service.PhotoService;
 import org.myphotos.domain.service.ProfileService;
 import org.myphotos.infra.util.CommonUtils;
 import org.myphotos.web.router.Router;
+import org.myphotos.web.security.SecurityUtils;
 
 @WebServlet(urlPatterns = "/", loadOnStartup = 1)
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final List<String> homeUrls;
-	
+
 	@EJB
 	private ProfileService profileService;
 	@EJB
 	private PhotoService photoService;
 	@Inject
 	private Router router;
-	
+
 	public IndexController() {
 		this.homeUrls = CommonUtils.getSafeList(Arrays.asList("/"));
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI();
-		if (isHomeUrl(url)) {
+		if (isHomeRequestFromTempAuthUser(url)) {
+			router.redirectToUrl("/sign-up", resp);
+		} else if (isHomeUrl(url)) {
 			handleHomeRequest(req, resp);
 		} else {
 			handleProfileRequest(req, resp);
 		}
 	}
 
+	private boolean isHomeRequestFromTempAuthUser(String url) {
+		return isHomeUrl(url) && SecurityUtils.isTempAuthenticated();
+	}
+
 	private boolean isHomeUrl(String url) {
 		return homeUrls.contains(url);
 	}
-	
-	private void handleHomeRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	private void handleHomeRequest(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		SortMode sortMode = getSortMode(req);
 		List<Photo> photos = photoService.findPopularPhotos(sortMode, Pageable.of(1, PHOTO_LIMIT));
 		long totalCount = photoService.countAllPhotos();
-		
+
 		req.setAttribute("photos", photos);
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("sortMode", sortMode.name().toLowerCase());
-		
+
 		router.forwardToPage("home", req, resp);
 	}
-	
-	private void handleProfileRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	private void handleProfileRequest(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		String uid = req.getRequestURI().substring(1);
 		Profile profile = profileService.findByUid(uid);
 		List<Photo> photos = photoService.findProfilePhotos(profile.getId(), Pageable.of(1, PHOTO_LIMIT));
-		
+
 		req.setAttribute("profile", profile);
 		req.setAttribute("profilePhotos", Boolean.TRUE);
 		req.setAttribute("photos", photos);
-		
+
 		router.forwardToPage("profile", req, resp);
 	}
 

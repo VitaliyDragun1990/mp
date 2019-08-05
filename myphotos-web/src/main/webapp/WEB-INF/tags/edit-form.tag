@@ -16,11 +16,11 @@
 			<img src="${profile.avatarUrl}" alt="${profile.fullName}" />
 		</a>
 		<h1><strong id="firstName">${profile.firstName}</strong> <strong id="lastName">${profile.lastName}</strong></h1>
-		<h4><span id="jotTitle">${profile.jobTitle}</span> <span id="in">in</span> <span id="location">${profile.location}</span></h4>
+		<h4><span id="jobTitle">${profile.jobTitle}</span> <span id="in">in</span> <span id="location">${profile.location}</span></h4>
 		<c:if test="${gotoProfileAvailable}">
 			<br />
 			<ul class="actions fit small">
-				<li><a href="/${profile.uid}" class="btn special small">Go to my profile</a></li>
+				<li><a href="/${profile.uid}" class="button special small">Go to my profile</a></li>
 			</ul>
 		</c:if>
 	</div>

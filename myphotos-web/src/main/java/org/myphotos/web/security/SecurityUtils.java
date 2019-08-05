@@ -2,6 +2,7 @@ package org.myphotos.web.security;
 
 import org.apache.shiro.subject.Subject;
 import org.myphotos.domain.entity.Profile;
+import org.myphotos.web.security.exception.AuthenticationException;
 
 /**
  * Static utility methods to provide user authentication in explicit way.
@@ -64,14 +65,14 @@ public class SecurityUtils {
 	/**
 	 * Returns {@link Profile} object of the currently authenticated user
 	 * 
-	 * @throws IllegalStateException if current user is not authenticated
+	 * @throws AuthenticationException if current user is not authenticated
 	 */
 	public static Profile getAuthenticatedProfile() {
 		Subject currentSubject = org.apache.shiro.SecurityUtils.getSubject();
 		if (currentSubject.isAuthenticated()) {
 			return (Profile) currentSubject.getPrincipal();
 		} else {
-			throw new IllegalStateException("Current user is not authenticated");
+			throw new AuthenticationException("Current user is not authenticated");
 		}
 	}
 

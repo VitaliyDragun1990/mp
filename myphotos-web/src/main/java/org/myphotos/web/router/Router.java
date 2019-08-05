@@ -51,5 +51,10 @@ public interface Router {
 	/**
 	 * Sends json as a response to specified request
 	 */
-	void sendJson(JsonObject json, HttpServletRequest request, HttpServletResponse response) throws IOException;
+	void sendJson(JsonObject json, HttpServletResponse response) throws IOException;
+
+	/**
+	 * Sends json as text/plain content type
+	 */
+	void sendJsonAsText(JsonObject json, HttpServletResponse response) throws IOException;
 }

@@ -21,7 +21,7 @@ public class Photo extends AbstractEntity {
 
 	@Id
 	@Column(unique = true, nullable = false, updatable = false)
-	@SequenceGenerator(name="PHOTO_ID_GENERATOR", sequenceName="PHOTO_SEQ")
+	@SequenceGenerator(name="PHOTO_ID_GENERATOR", sequenceName="PHOTO_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PHOTO_ID_GENERATOR")
 	private Long id;
 	

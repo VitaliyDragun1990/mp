@@ -8,11 +8,17 @@ import java.nio.file.StandardCopyOption;
 
 import org.myphotos.infra.exception.base.ApplicationException;
 
+/**
+ * Represents image resource obtained via URL
+ * 
+ * @author Vitaliy Dragun
+ *
+ */
 public class URLImageResource extends AbstractMimeTypeImageResource {
-	
+
 	private final String url;
 	private final URLConnection urlConnection;
-	
+
 	public URLImageResource(String url) {
 		this.url = url;
 		try {

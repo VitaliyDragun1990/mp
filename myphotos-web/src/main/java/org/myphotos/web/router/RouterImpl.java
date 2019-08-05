@@ -17,6 +17,7 @@ import org.myphotos.web.security.SecurityUtils;
 class RouterImpl implements Router {
 
 	private static final String JSON_CONTENT_TYPE = "application/json";
+	private static final String TEXT_CONTENT_TYPE = "text/plain";
 	private static final String CURRENT_PAGE = "currentPage";
 	private static final String TEMPLATE_PAGE = "/WEB-INF/template/page-template.jsp";
 
@@ -49,8 +50,13 @@ class RouterImpl implements Router {
 	}
 
 	@Override
-	public void sendJson(JsonObject json, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void sendJson(JsonObject json, HttpServletResponse response) throws IOException {
 		sendContent(JSON_CONTENT_TYPE, json.toString(), response);
+	}
+	
+	@Override
+	public void sendJsonAsText(JsonObject json, HttpServletResponse response) throws IOException {
+		sendContent(TEXT_CONTENT_TYPE, json.toString(), response);
 	}
 	
 	private String resolveCurrentPage(String pageName) {

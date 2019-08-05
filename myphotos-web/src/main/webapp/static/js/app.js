@@ -133,7 +133,7 @@ $(function () {
             new qq.FineUploaderBasic({
                 button: avatarUploader[0],
                 request: {
-                    endpoint: 'upload-avatar.json'
+                    endpoint: '/upload-avatar'
                 },
                 validation: {
                     allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
@@ -162,7 +162,7 @@ $(function () {
             new qq.FineUploaderBasic({
                 button: upload[0],
                 request: {
-                    endpoint: 'upload-photos.json'
+                    endpoint: '/upload-photos'
                 },
                 validation: {
                     allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
@@ -194,7 +194,7 @@ $(function () {
         $('#current-photo .large-photo').removeClass('large-photo');
         $('#current-photo .small-photo').attr('src', result.smallUrl);
         $('#current-photo .small-photo').removeClass('small-photo');
-        $('#current-photo .original-photo').attr('href', result.originalUrl);
+        $('#current-photo .original-photo').attr('href', '/download/'+result.photoId+'.jpg');
         $('#current-photo .original-photo').removeClass('original-photo');
 
         $('#current-photo .created').after(result.created);

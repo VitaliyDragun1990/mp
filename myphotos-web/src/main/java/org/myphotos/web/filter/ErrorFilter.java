@@ -78,7 +78,7 @@ public class ErrorFilter extends AbstractFilter {
 		if (WebUtils.isAjaxRequest(request)) {
 			sendAjaxJsonErrorResponse(errorModel, response);
 		} else {
-			sendErrorPage(errorModel, request, response);
+			forwardToErrorPage(errorModel, request, response);
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class ErrorFilter extends AbstractFilter {
 		router.sendJson(json, response);
 	}
 
-	private void sendErrorPage(ErrorModel errorModel, HttpServletRequest request, HttpServletResponse response)
+	private void forwardToErrorPage(ErrorModel errorModel, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("errorModel", errorModel);
 		router.forwardToPage("error", request, response);

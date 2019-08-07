@@ -10,6 +10,9 @@ public class ImageLinkSOAP {
 
 	private String url;
 
+	public ImageLinkSOAP() {
+	}
+	
 	public ImageLinkSOAP(String url) {
 		this.url = url;
 	}

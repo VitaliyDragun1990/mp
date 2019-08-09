@@ -58,7 +58,7 @@ public class AccessTokenServiceBean implements AccessTokenService {
 		boolean removed = accessTokenRepository.removeAccessToken(token);
 		if (!removed) {
 			logger.log(Level.WARNING, "Access token {0} not found", token);
-			throw new InvalidAccessTokenException("Access toke not found");
+			throw new InvalidAccessTokenException("Access token not found");
 		}
 
 	}

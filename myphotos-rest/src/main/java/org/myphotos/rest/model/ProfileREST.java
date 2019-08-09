@@ -7,16 +7,16 @@ import org.myphotos.converter.ConvertAsAbsoluteURL;
 @XmlType(name = "")
 public class ProfileREST extends SimpleProfileREST {
 
-	private String firstName;
+	protected String firstName;
 
-	private String lastName;
+	protected String lastName;
 
 	@ConvertAsAbsoluteURL
-	private String avatarUrl;
+	protected String avatarUrl;
 
-	private String jobTitle;
+	protected String jobTitle;
 
-	private String location;
+	protected String location;
 
 	private int photoCount;
 

@@ -21,6 +21,7 @@ import org.myphotos.generator.ProfileUidManager;
 import org.myphotos.infra.cdi.qualifier.Property;
 import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.repository.ProfileRepository;
+import org.myphotos.infra.util.CommonUtils;
 import org.myphotos.media.ImageService;
 import org.myphotos.media.model.ImageCategory;
 import org.myphotos.media.model.URLImageResource;
@@ -63,7 +64,7 @@ public class ProfileServiceBean implements ProfileService {
 	public void create(Profile profile, boolean uploadProfileAvatar) {
 		setProfileUidIfAbsent(profile);
 		profileRepository.create(profile);
-		if (uploadProfileAvatar && profile.getAvatarUrl() != null) {
+		if (uploadProfileAvatar && CommonUtils.isNotBlank(profile.getAvatarUrl())) {
 			uploadNewAvatar(profile, new URLImageResource(profile.getAvatarUrl()));
 		}
 	}

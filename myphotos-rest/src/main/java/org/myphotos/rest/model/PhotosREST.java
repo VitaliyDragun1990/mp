@@ -4,11 +4,17 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @XmlType(name = "")
+@ApiModel("Photos")
 public class PhotosREST {
 
+	@ApiModelProperty(required = true, value = "Photo list")
 	private List<? extends ProfilePhotoREST> photos;
 
+	@ApiModelProperty(required = false, value = "Total photo count")
 	private Long total;
 
 	public PhotosREST() {

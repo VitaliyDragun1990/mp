@@ -4,16 +4,24 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.myphotos.converter.ConvertAsAbsoluteURL;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @XmlType(name = "")
+@ApiModel("ProfilePhoto")
 public class ProfilePhotoREST {
 
+	@ApiModelProperty(required = true, value = "Id of the photo. Used as unique identifier for /preview and /download API")
 	private Long id;
 
 	@ConvertAsAbsoluteURL
+	@ApiModelProperty(required = true)
 	private String smallUrl;
 
+	@ApiModelProperty(required = true)
 	private long views;
 
+	@ApiModelProperty(required = true)
 	private long downloads;
 
 	public Long getId() {

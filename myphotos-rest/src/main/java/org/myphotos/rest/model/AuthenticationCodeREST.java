@@ -1,12 +1,14 @@
 package org.myphotos.rest.model;
 
-import javax.xml.bind.annotation.XmlType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-@XmlType(name = "")
+@ApiModel("AuthenticationCode")
 public class AuthenticationCodeREST {
 
 	private String code;
 
+	@ApiModelProperty(required = true, value = "Authentication code retrieved from social service")
 	public String getCode() {
 		return code;
 	}

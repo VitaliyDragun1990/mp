@@ -4,20 +4,26 @@ import org.apache.commons.fileupload.FileItem;
 import org.myphotos.domain.model.ImageResource;
 import org.myphotos.media.model.AbstractMimeTypeImageResource;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Represents image uploaded to the application via REST request.
  * 
  * @author Vitaliy Dragun
  *
  */
+@ApiModel("UploadImage")
 public class UploadImageREST {
 
+	@ApiModelProperty(hidden = true)
 	private final FileItem fileItem;
 
 	public UploadImageREST(FileItem fileItem) {
 		this.fileItem = fileItem;
 	}
 
+	@ApiModelProperty(hidden = true)
 	public ImageResource getImageResource() {
 		return new FileItemImageResource(fileItem);
 	}

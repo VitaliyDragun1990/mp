@@ -2,11 +2,13 @@ package org.myphotos.rest.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-@XmlType(name = "")
+@ApiModel("ValidationResult")
 public class ValidationResultREST extends ErrorMessageREST {
 
+	@ApiModelProperty(required = true)
 	private List<ValidationItemREST> items;
 
 	public ValidationResultREST() {

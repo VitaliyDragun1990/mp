@@ -3,6 +3,8 @@ package org.myphotos.rest.controller;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM;
 import static org.myphotos.rest.Constants.PHOTO_LIMIT;
+import static org.myphotos.rest.StatusMessages.INTERRNAL_ERROR;
+import static org.myphotos.rest.StatusMessages.SERVICE_UNAVAILABLE;
 
 import java.util.List;
 
@@ -24,13 +26,27 @@ import org.myphotos.domain.model.Image;
 import org.myphotos.domain.model.Pageable;
 import org.myphotos.domain.model.SortMode;
 import org.myphotos.domain.service.PhotoService;
+import org.myphotos.rest.model.ErrorMessageREST;
 import org.myphotos.rest.model.ImageLinkREST;
 import org.myphotos.rest.model.PhotoREST;
 import org.myphotos.rest.model.PhotosREST;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Api("photo")
 @Path("/photo")
 @Produces({APPLICATION_JSON})
 @RequestScoped
+@ApiResponses({
+	@ApiResponse(code = 500, message = INTERRNAL_ERROR, response = ErrorMessageREST.class),
+	@ApiResponse(code = 502, message = SERVICE_UNAVAILABLE),
+	@ApiResponse(code = 503, message = SERVICE_UNAVAILABLE),
+	@ApiResponse(code = 504, message = SERVICE_UNAVAILABLE)
+})
 public class PhotoController {
 
 	@EJB
@@ -44,10 +60,16 @@ public class PhotoController {
 	
 	@GET
 	@Path("/all")
+	@ApiOperation(value = "Finds popular photos according to provided sortMode",
+			notes = "If total photo count is required - set withTotal=true")
 	public PhotosREST findAllPhotos(
+			@ApiParam(value = "Flag, which indicates whether total photo count should be provided or not")
 			@DefaultValue("false") @QueryParam("withTotal") boolean withTotal,
+			@ApiParam(value = "Sort mode to sort photos with", allowableValues = "popular_photo,popular_author")
 			@DefaultValue("popular_photo") @QueryParam("sortMode") String sortMode,
+			@ApiParam(value = "Pagination page number (should start with 1)")
 			@DefaultValue("1") @QueryParam("page") int page,
+			@ApiParam(value = "Max number of photos to return")
 			@DefaultValue(PHOTO_LIMIT) @QueryParam("limit") int limit) {
 		PhotosREST result = new PhotosREST();
 		
@@ -62,7 +84,13 @@ public class PhotoController {
 	
 	@GET
 	@Path("/preview/{id}")
+	@ApiOperation(value = "Gets large photo's url by id",
+		notes = "FYI: This method increments photo view count by 1")
+	@ApiResponses({
+		@ApiResponse(code = 404, message = "Can't find photo with provided id", response = ErrorMessageREST.class)
+	})
 	public ImageLinkREST viewLargePhoto(
+			@ApiParam(value = "Unique identifier of the photo", required = true)
 			@PathParam("id") Long photoId) {
 		String relativeUrl = photoService.viewLargePhoto(photoId);
 		String absoluteUrl = urlConverter.convert(relativeUrl);
@@ -73,7 +101,13 @@ public class PhotoController {
 	@GET
 	@Path("/download/{id}")
 	@Produces(APPLICATION_OCTET_STREAM)
+	@ApiOperation(value = "Downloads original photo by its id",
+		notes = "FYI: This method increments photo download count by 1")
+	@ApiResponses({
+		@ApiResponse(code = 404, message = "Can't find photo with provided id", response = ErrorMessageREST.class)
+	})
 	public Response downloadOriginalImage(
+			@ApiParam(value = "Unique identifier of the photo", required = true)
 			@PathParam("id") Long photoId) {
 		Image originalPhoto = photoService.downloadOriginalPhoto(photoId);
 		return buildResponse(originalPhoto);

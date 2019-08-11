@@ -1,8 +1,8 @@
 package org.myphotos.rest.model;
 
-import javax.xml.bind.annotation.XmlType;
+import io.swagger.annotations.ApiModel;
 
-@XmlType(name = "")
+@ApiModel("UpdateProfile")
 public class UpdateProfileREST extends SignUpProfileREST {
 
 }

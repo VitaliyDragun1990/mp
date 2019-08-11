@@ -4,20 +4,30 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.myphotos.converter.ConvertAsAbsoluteURL;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @XmlType(name = "")
+@ApiModel("Profile")
 public class ProfileREST extends SimpleProfileREST {
 
+	@ApiModelProperty(required = true)
 	protected String firstName;
 
+	@ApiModelProperty(required = true)
 	protected String lastName;
 
 	@ConvertAsAbsoluteURL
+	@ApiModelProperty(required = true)
 	protected String avatarUrl;
 
+	@ApiModelProperty(required = true)
 	protected String jobTitle;
 
+	@ApiModelProperty(required = true)
 	protected String location;
 
+	@ApiModelProperty(required = true)
 	private int photoCount;
 
 	public String getFirstName() {

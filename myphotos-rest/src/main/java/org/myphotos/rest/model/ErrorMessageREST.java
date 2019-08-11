@@ -1,11 +1,23 @@
 package org.myphotos.rest.model;
 
-import javax.xml.bind.annotation.XmlType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-@XmlType(name = "")
+@ApiModel("ErrorMessage")
 public class ErrorMessageREST {
 
+	@ApiModelProperty(
+			required = true,
+			value = "Error message. Should be displayed to the user if userError=true,"
+					+ " otherwise it is message for the developer"
+			)
 	private String message;
+	
+	@ApiModelProperty(
+			required = true,
+			value = "Category of the error message. If userError=true, message should be displayed to the user,"
+					+ " otherwise it is message for the developer"
+			)
 	private boolean userError;
 	
 	public ErrorMessageREST() {

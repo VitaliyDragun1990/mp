@@ -5,17 +5,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.myphotos.domain.entity.Profile;
-import org.myphotos.security.SecurityManager;
 import org.myphotos.validation.group.SignUpGroup;
 import org.myphotos.web.controller.AbstractSaveProfileController;
 import org.myphotos.web.security.SecurityUtils;
+import org.myphotos.web.security.authentication.AuthenticationManager;
 
 @WebServlet(urlPatterns = "/sign-up/complete", loadOnStartup = 1)
 public class CompleteSignUpController extends AbstractSaveProfileController {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private SecurityManager securityManager;
+	private AuthenticationManager authenticationManager;
 
 	@Override
 	protected Class<?>[] getValidationGroups() {
@@ -34,7 +34,7 @@ public class CompleteSignUpController extends AbstractSaveProfileController {
 
 	@Override
 	protected void saveProfile(HttpServletRequest req, Profile profile) {
-		securityManager.completeActiveSignUp();
+		authenticationManager.completeActiveSignUp();
 		req.getSession().removeAttribute("signUpProfile");
 		reloginWithUserRole(profile);
 	}

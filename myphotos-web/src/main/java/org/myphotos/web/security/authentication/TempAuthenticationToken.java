@@ -1,4 +1,4 @@
-package org.myphotos.web.security;
+package org.myphotos.web.security.authentication;
 
 import static org.myphotos.web.security.SecurityUtils.TEMP_PASS;
 import static org.myphotos.web.security.SecurityUtils.TEMP_PROFILE;

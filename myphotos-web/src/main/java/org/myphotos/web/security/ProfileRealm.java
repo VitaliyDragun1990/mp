@@ -13,6 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.myphotos.domain.entity.Profile;
+import org.myphotos.web.security.authentication.ProfileAuthenticationToken;
 
 public class ProfileRealm extends AuthorizingRealm {
 

@@ -2,6 +2,8 @@ package org.myphotos.web.security;
 
 import org.apache.shiro.subject.Subject;
 import org.myphotos.domain.entity.Profile;
+import org.myphotos.web.security.authentication.ProfileAuthenticationToken;
+import org.myphotos.web.security.authentication.TempAuthenticationToken;
 import org.myphotos.web.security.exception.AuthenticationException;
 
 /**
@@ -12,13 +14,13 @@ import org.myphotos.web.security.exception.AuthenticationException;
  */
 public class SecurityUtils {
 
-	static final String TEMP_PROFILE = "";
+	public static final String TEMP_PROFILE = "";
 
-	static final String TEMP_PASS = "";
+	public static final String TEMP_PASS = "";
 
-	static final String TEMP_ROLE = "TEMP";
+	public static final String TEMP_ROLE = "TEMP";
 
-	static final String PROFILE_ROLE = "PROFILE";
+	public static final String PROFILE_ROLE = "PROFILE";
 
 	/**
 	 * Logs out currently authenticated user

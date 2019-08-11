@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
-import org.myphotos.security.SecurityManager;
 import org.myphotos.web.router.Router;
 import org.myphotos.web.security.SecurityUtils;
+import org.myphotos.web.security.authentication.AuthenticationManager;
 
 abstract class AbstractAuthenticationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	protected SecurityManager securityManager;
+	protected AuthenticationManager authenticationManager;
 	
 	@Inject
 	protected Router router;
@@ -48,7 +48,7 @@ abstract class AbstractAuthenticationController extends HttpServlet {
 	}
 
 	private void processAuthentication(String code, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		Optional<Profile> singInProfile = securityManager.signIn(code, getProvider());
+		Optional<Profile> singInProfile = authenticationManager.signIn(code, getProvider());
 		
 		if (singInProfile.isPresent()) {
 			completeSignInForExistingProfile(singInProfile.get(), resp);
@@ -63,7 +63,7 @@ abstract class AbstractAuthenticationController extends HttpServlet {
 	}
 	
 	private void startSignUpProcessForNewProfile(String code, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		Profile profile = securityManager.startSignUp(code, getProvider());
+		Profile profile = authenticationManager.startSignUp(code, getProvider());
 		SecurityUtils.authenticateTemporary();
 		req.getSession().setAttribute("signUpProfile", profile);
 		router.redirectToUrl("/sign-up", resp);

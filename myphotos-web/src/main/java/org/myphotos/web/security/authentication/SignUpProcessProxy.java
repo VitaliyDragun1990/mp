@@ -1,4 +1,4 @@
-package org.myphotos.security;
+package org.myphotos.web.security.authentication;
 
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.infra.cdi.qualifier.SessionProxy;
 import org.myphotos.infra.exception.business.InvalidWorkFlowException;
+import org.myphotos.security.SignUpProcess;
 
 @SessionScoped
 @SessionProxy

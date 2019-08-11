@@ -40,7 +40,7 @@ public class AuthenticationContoller {
 	private Validator validator;
 	
 	@Inject
-	private AuthenticationManager securityManager;
+	private AuthenticationManager authManager;
 	
 	@Inject
 	private ConstraintViolationConverter constraintViolationConverter;
@@ -50,7 +50,7 @@ public class AuthenticationContoller {
 	@Consumes(APPLICATION_JSON)
 	public Response facebookSignIn(AuthenticationCodeREST authenticationCode) {
 		validateCode(authenticationCode.getCode());
-		AuthenticationResult authenticationResult = securityManager.signIn(authenticationCode.getCode(), Provider.FACEBOOK);
+		AuthenticationResult authenticationResult = authManager.signIn(authenticationCode.getCode(), Provider.FACEBOOK);
 		return buildResponse(authenticationResult);
 	}
 	
@@ -65,7 +65,7 @@ public class AuthenticationContoller {
 	@Path("/sign-in/google-plus")
 	public Response goolgePlusSignIn(AuthenticationCodeREST authenticationCode) {
 		validateCode(authenticationCode.getCode());
-		AuthenticationResult authenticationResult = securityManager.signIn(authenticationCode.getCode(), Provider.GOOGLE);
+		AuthenticationResult authenticationResult = authManager.signIn(authenticationCode.getCode(), Provider.GOOGLE);
 		return buildResponse(authenticationResult);
 	}
 	
@@ -80,14 +80,14 @@ public class AuthenticationContoller {
 	@Path("/sign-out")
 	public Response signOut(
 			@HeaderParam(ACCESS_TOKEN_HEADER) String token) {
-		securityManager.signOut(token);
+		authManager.signOut(token);
 		return Response.ok().build();
 	}
 	
 	private Response processSignUp(SignUpProfileREST signUpProfile) {
 		Set<ConstraintViolation<SignUpProfileREST>> violations = validator.validate(signUpProfile, Default.class);
 		if (violations.isEmpty()) {
-			AuthenticationResult authenticationResult = securityManager.signUp(signUpProfile);
+			AuthenticationResult authenticationResult = authManager.signUp(signUpProfile);
 			return buildResponse(authenticationResult);
 		} else {
 			return buildBadRequestResponse(violations);

@@ -1,4 +1,4 @@
-package org.myphotos.security;
+package org.myphotos.web.security.authentication;
 
 import static org.myphotos.infra.cdi.qualifier.SocialProvider.Provider;
 
@@ -16,7 +16,7 @@ import org.myphotos.infra.exception.business.ObjectNotFoundException;
  *
  */
 @Vetoed
-public interface SecurityManager {
+public interface AuthenticationManager {
 
 	/**
 	 * Tries to sign in using specified {@code token} and given

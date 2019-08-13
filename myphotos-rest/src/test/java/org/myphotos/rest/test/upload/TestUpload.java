@@ -29,18 +29,18 @@ public class TestUpload {
 				);
 	}
 	
-	private static void makeUploadRequest(String uploadAvatarUrl, String filePath) {
+	private static void makeUploadRequest(String apiUrl, String filePath) {
 		Client client = ClientBuilder.newBuilder()
 				.register(MultiPartFeature.class)
 				.build();
 		Entity<?> entity = createUploadEntity(filePath);
 		Response response = client
-				.target(uploadAvatarUrl)
+				.target(apiUrl)
 				.request(MediaType.APPLICATION_JSON)
 				.header(Constants.ACCESS_TOKEN_HEADER, accessToken)
 				.post(entity);
 		
-		System.out.println("Request: " + uploadAvatarUrl);
+		System.out.println("Request: " + apiUrl);
 		System.out.println("Status: " + response.getStatus());
 		System.out.println("Content: " + response.readEntity(String.class));
 	}

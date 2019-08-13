@@ -70,7 +70,7 @@ public class AuthenticationContoller {
 	@Consumes(APPLICATION_JSON)
 	@ApiOperation(value = "Sign in via Facebook", response = SimpleProfileREST.class,
 			notes = "Parameter 'authenticationCode' - code retrieved from Facebook after successful authentication"
-					+ " and authoriation took place")
+					+ " and authorization took place")
 	@ApiResponses({
 		@ApiResponse(code = 401, message = "Invalid authentication code", response = ErrorMessageREST.class),
 		@ApiResponse(code = 404,
@@ -107,7 +107,7 @@ public class AuthenticationContoller {
 	@Path("/sign-in/google-plus")
 	@ApiOperation(value = "Sign in via Google Plus", response = SimpleProfileREST.class,
 		notes = "Parameter 'authenticationCode' - code retrieved from Google Plus after successful authentication"
-			+ " and authoriation took place")
+			+ " and authorization took place")
 	@ApiResponses({
 		@ApiResponse(code = 401, message = "Invalid authentication code", response = ErrorMessageREST.class),
 		@ApiResponse(code = 404,

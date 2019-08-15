@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import org.myphotos.cdi.interceptor.AsyncOperationInterceptor;
+import org.myphotos.converter.ModelConverter;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.domain.model.AsyncOperation;
 import org.myphotos.domain.model.ImageResource;
@@ -26,16 +27,19 @@ import org.myphotos.media.ImageService;
 import org.myphotos.media.model.ImageCategory;
 import org.myphotos.media.model.URLImageResource;
 import org.myphotos.repository.jpa.DBSource;
+import org.myphotos.rmi.model.RemoteProfile;
+import org.myphotos.rmi.service.RemoteProfileService;
 
 @Stateless
 @LocalBean
 @Local(ProfileService.class)
-public class ProfileServiceBean implements ProfileService {
+public class ProfileServiceBean implements ProfileService, RemoteProfileService {
 	
 	private String avatarPlaceholderUrl;
 	private ProfileRepository profileRepository;
 	private ImageService imageService;
 	private ProfileUidManager uidManager;
+	private ModelConverter modelConverter;
 
 	@Override
 	public Profile findById(Long id) throws ObjectNotFoundException {
@@ -44,6 +48,12 @@ public class ProfileServiceBean implements ProfileService {
 			throw new ObjectNotFoundException(String.format("Profile with id: %s not found", id));
 		}
 		return profile.get();
+	}
+	
+	@Override
+	public RemoteProfile findRemoteById(Long id) throws ObjectNotFoundException {
+		Profile profile = findById(id);
+		return modelConverter.convert(profile, RemoteProfile.class);
 	}
 
 	@Override
@@ -156,6 +166,11 @@ public class ProfileServiceBean implements ProfileService {
 	@Inject
 	void setUidManager(ProfileUidManager uidManager) {
 		this.uidManager = uidManager;
+	}
+	
+	@Inject
+	public void setModelConverter(ModelConverter modelConverter) {
+		this.modelConverter = modelConverter;
 	}
 
 }

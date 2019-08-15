@@ -47,6 +47,12 @@
 						</jarModule>
 						<jarModule>
 							<groupId>com.revenat</groupId>
+							<artifactId>myphotos-rmi</artifactId>
+							<bundleDir>/lib/</bundleDir>
+							<bundleFileName>myphotos-rmi.jar</bundleFileName>
+						</jarModule>
+						<jarModule>
+							<groupId>com.revenat</groupId>
 							<artifactId>myphotos-common</artifactId>
 							<bundleDir>/lib/</bundleDir>
 							<bundleFileName>myphotos-common.jar</bundleFileName>
@@ -84,6 +90,11 @@
 		<dependency>
 			<groupId>com.revenat</groupId>
 			<artifactId>myphotos-model</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.revenat</groupId>
+			<artifactId>myphotos-rmi</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

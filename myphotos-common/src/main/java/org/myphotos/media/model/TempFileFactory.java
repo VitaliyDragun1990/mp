@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Vitaliy Dragun
  *
  */
-class TempFileFactory {
+public class TempFileFactory {
 
 	static Path createTempFile(String extension) {
 		Path temporaryFilePath = buildTemporaryFilePath(extension);
@@ -31,7 +31,7 @@ class TempFileFactory {
 		return Paths.get(temporaryDirectoryPath, uniqueFileName);
 	}
 
-	static void deleteTempFile(Path path) {
+	public static void deleteTempFile(Path path) {
 		try {
 			Files.deleteIfExists(path);
 		} catch (IOException | RuntimeException e) {

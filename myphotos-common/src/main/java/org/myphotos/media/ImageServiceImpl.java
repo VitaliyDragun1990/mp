@@ -1,6 +1,6 @@
 package org.myphotos.media;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
@@ -13,7 +13,7 @@ import org.myphotos.media.model.TempImageResource;
 import org.myphotos.media.resizer.ImageResizer;
 import org.myphotos.media.storage.ImageStorage;
 
-@Dependent
+@ApplicationScoped
 class ImageServiceImpl implements ImageService {
 
 	private ImageResizer imageResizer;

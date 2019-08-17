@@ -3,11 +3,9 @@ package org.myphotos.ejb.service.domain;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -35,7 +33,7 @@ public class PhotoServiceBean implements PhotoService {
 	private PhotoRepository photoRepository;
 	private ProfileRepository profileRepository;
 	private ImageService imageService;
-	private SessionContext sessionContext;
+//	private SessionContext sessionContext;
 	private AsyncUploadImageManager asyncUploadImageManager;
 
 	@Override
@@ -104,19 +102,20 @@ public class PhotoServiceBean implements PhotoService {
 		asyncUploadImageManager.uploadNewPhoto(profile, imageResource, callback);
 	}
 
-	public Photo uploadNewPhoto(Profile profile, ImageResource imageResource) {
-		Photo photo = imageService.uploadPhoto(imageResource);
-		
-		createNewProfilePhoto(profile, photo);
-		
-		return photo;
-	}
+	/*
+	 * public Photo uploadNewPhoto(Profile profile, ImageResource imageResource) {
+	 * Photo photo = imageService.uploadPhoto(imageResource);
+	 * 
+	 * createNewProfilePhoto(profile, photo);
+	 * 
+	 * return photo; }
+	 */
 	
-	public void createNewPhoto(Long profileId, Photo photo) {
-		createNewProfilePhoto(profileRepository.findById(profileId).get(), photo);
+	public void saveNewPhoto(Long profileId, Photo photo) {
+		saveNewPhoto(profileRepository.findById(profileId).get(), photo);
 	}
 
-	private void createNewProfilePhoto(Profile profile, Photo photo) {
+	private void saveNewPhoto(Profile profile, Photo photo) {
 		photo.setProfile(profile);
 		photoRepository.create(photo);
 		photoRepository.flush();
@@ -140,10 +139,10 @@ public class PhotoServiceBean implements PhotoService {
 		this.imageService = imageService;
 	}
 	
-	@Resource
-	void setSessionContext(SessionContext sessionContext) {
-		this.sessionContext = sessionContext;
-	}
+	/*
+	 * @Resource void setSessionContext(SessionContext sessionContext) {
+	 * this.sessionContext = sessionContext; }
+	 */
 	
 	@EJB
 	void setAsyncUploadImageManager(AsyncUploadImageManager asyncUploadImageManager) {

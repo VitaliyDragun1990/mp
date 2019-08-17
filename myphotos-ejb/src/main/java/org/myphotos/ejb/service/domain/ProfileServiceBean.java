@@ -105,14 +105,14 @@ public class ProfileServiceBean implements ProfileService, RemoteProfileService 
 
 	public void uploadNewAvatar(Profile profile, ImageResource imageResource) {
 		String avatarUrl = imageService.uploadAvatar(imageResource);
-		uploadNewAvatar(profile, avatarUrl);
+		saveNewAvatar(profile, avatarUrl);
 	}
 	
-	public void uploadNewAvatar(Long profileId, String avatarUrl) {
-		uploadNewAvatar(profileRepository.findById(profileId).get(), avatarUrl);
+	public void saveNewAvatar(Long profileId, String avatarUrl) {
+		saveNewAvatar(profileRepository.findById(profileId).get(), avatarUrl);
 	}
 
-	private void uploadNewAvatar(Profile profile, String avatarUrl) {
+	private void saveNewAvatar(Profile profile, String avatarUrl) {
 		if (isProfileAvatarNotPlaceholder(profile.getAvatarUrl())) {
 			imageService.removeImage(profile.getAvatarUrl());
 		}

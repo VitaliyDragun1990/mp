@@ -114,14 +114,14 @@ public class UploadResponseProcessorMDBean implements MessageListener {
 	private void processSuccessPhotoMessage(Long profileId, ObjectMessage message, String imageResourcePath)
 			throws JMSException {
 		Photo photo = (Photo) message.getObject();
-		photoServiceBean.createNewPhoto(profileId, photo);
+		photoServiceBean.saveNewPhoto(profileId, photo);
 		asyncUploadImageManager.completeUploadNewPhotoSuccess(imageResourcePath, photo);
 	}
 
 	private void processSuccessAvatarMessage(Long profileId, ObjectMessage message, String imageResourcePath)
 			throws JMSException {
 		Profile profile = (Profile) message.getObject();
-		profileServiceBean.uploadNewAvatar(profileId, profile.getAvatarUrl());
+		profileServiceBean.saveNewAvatar(profileId, profile.getAvatarUrl());
 		asyncUploadImageManager.completeUploadNewAvatarSuccess(imageResourcePath, profile);
 	}
 

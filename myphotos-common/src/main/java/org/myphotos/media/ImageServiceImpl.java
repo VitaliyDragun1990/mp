@@ -47,9 +47,9 @@ class ImageServiceImpl implements ImageService {
 	}
 	
 	private String createdResizedImage(ImageResource imageResource, ImageCategory imageCategory) {
-		try (TempImageResource tempPath = new TempImageResource()) {
-			imageResizer.resize(imageResource.getPath(), tempPath.getPath(), imageCategory);
-			return imageStorage.savePublicImage(tempPath.getPath(), imageCategory);
+		try (TempImageResource tempResource = new TempImageResource()) {
+			imageResizer.resize(imageResource.getPath(), tempResource.getPath(), imageCategory);
+			return imageStorage.savePublicImage(tempResource.getPath(), imageCategory);
 		}
 	}
 

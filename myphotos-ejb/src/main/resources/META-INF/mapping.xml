@@ -8,13 +8,13 @@
                  
     <mapped-superclass class="org.myphotos.domain.entity.AbstractEntity">
     	<entity-listeners>
-    		<entity-listener class="org.myphotos.repository.jpa.listener.CreatedNowListener"></entity-listener>
+    		<entity-listener class="org.myphotos.ejb.repository.jpa.listener.CreatedNowListener"></entity-listener>
     	</entity-listeners>
     </mapped-superclass>
 
 	<entity class="org.myphotos.security.model.AccessToken">
 		<entity-listeners>
-			<entity-listener class="org.myphotos.repository.jpa.listener.AccessTokenLifeCycleManager">
+			<entity-listener class="org.myphotos.ejb.repository.jpa.listener.AccessTokenLifeCycleManager">
 			</entity-listener>
 		</entity-listeners>
 	</entity>

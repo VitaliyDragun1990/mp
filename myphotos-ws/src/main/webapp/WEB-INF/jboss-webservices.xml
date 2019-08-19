@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webservices xmlns="http://www.jboss.com/xml/ns/javaee">
+    <context-root>ws</context-root>
+    <port-component>
+        <ejb-name>PhotoWebServiceBean</ejb-name>
+        <port-component-name>PhotoServicePort</port-component-name>
+        <port-component-uri>/PhotoService</port-component-uri>
+    </port-component>
+    <port-component>
+        <ejb-name>ProfileWebServiceBean</ejb-name>
+        <port-component-name>ProfileServicePort</port-component-name>
+        <port-component-uri>/ProfileService</port-component-uri>
+    </port-component>
+</webservices>

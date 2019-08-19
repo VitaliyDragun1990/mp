@@ -19,7 +19,7 @@ public abstract class AbstractEntity implements Serializable {
 	@NotNull
 	@PastTime
 	@Convert(converter = LocalDateTimeConverter.class)
-	@Column(nullable = false, insertable = false)
+	@Column(nullable = false, updatable = false)
 	private LocalDateTime created;
 	
 	public LocalDateTime getCreated() {

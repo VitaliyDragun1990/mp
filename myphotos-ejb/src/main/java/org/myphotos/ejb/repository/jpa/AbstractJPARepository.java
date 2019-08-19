@@ -33,7 +33,7 @@ abstract class AbstractJPARepository<T, I> implements EntityRepository<T, I> {
 
 	@Override
 	public void delete(T entity) {
-		em.refresh(entity);
+		em.remove(entity);
 	}
 
 	@Override

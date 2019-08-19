@@ -15,7 +15,7 @@ import javax.enterprise.inject.Vetoed;
 public interface ResourceLoader {
 
 	/**
-	 * Checks whether rresource with specified {@code resourceName} is supported by
+	 * Checks whether resource with specified {@code resourceName} is supported by
 	 * this {@link ResourceLoader} implementation
 	 * 
 	 * @param resourceName name of the resource to check

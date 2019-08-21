@@ -20,6 +20,7 @@ import javax.servlet.http.Part;
 
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.domain.model.AsyncOperation;
+import org.myphotos.domain.service.ProfileService;
 import org.myphotos.web.model.MultipartImageResource;
 import org.myphotos.web.router.Router;
 import org.myphotos.web.security.SecurityUtils;
@@ -34,7 +35,10 @@ abstract class AbstractUploadController<T> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	protected Logger logger; 
+	protected Logger logger;
+	
+	@Inject
+	protected ProfileService profileService;
 	
 	@Inject
 	private Router router;
@@ -42,11 +46,15 @@ abstract class AbstractUploadController<T> extends HttpServlet {
 	@Override
 	protected final void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Part part = req.getPart("qqfile");
-		Profile profile = SecurityUtils.getAuthenticatedProfile();
+		Profile profile = getCurrentProfile();
 		
 		ImageUploadAsyncCallback asyncCallback = buildAsyncCallback(req, resp);
 		
 		uploadImageAsynchronously(profile, new MultipartImageResource(part), asyncCallback);
+	}
+
+	protected Profile getCurrentProfile() {
+		return profileService.findById(SecurityUtils.getAuthenticatedUser().getId());
 	}
 
 	private ImageUploadAsyncCallback buildAsyncCallback(HttpServletRequest req, HttpServletResponse resp) {

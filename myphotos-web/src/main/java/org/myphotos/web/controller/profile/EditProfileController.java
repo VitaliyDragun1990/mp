@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.myphotos.domain.entity.Profile;
+import org.myphotos.domain.service.ProfileService;
 import org.myphotos.web.router.Router;
 import org.myphotos.web.security.SecurityUtils;
 
@@ -18,12 +19,21 @@ public class EditProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
+	private ProfileService profileService;
+	
+	@Inject
 	private Router router;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Profile profile = SecurityUtils.getAuthenticatedProfile();
+		Profile profile = getCurrentProfile();
+		
 		req.setAttribute("profile", profile);
+		
 		router.forwardToPage("edit", req, resp);
+	}
+
+	protected Profile getCurrentProfile() {
+		return profileService.findById(SecurityUtils.getAuthenticatedUser().getId());
 	}
 }

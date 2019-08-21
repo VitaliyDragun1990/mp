@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ValidationResult")
 public class ValidationResultREST extends ErrorMessageREST {
 
-	@ApiModelProperty(required = true)
 	private List<ValidationItemREST> items;
 
 	public ValidationResultREST() {
@@ -20,6 +19,7 @@ public class ValidationResultREST extends ErrorMessageREST {
 		this.items = items;
 	}
 
+	@ApiModelProperty(required = true)
 	public List<ValidationItemREST> getItems() {
 		return items;
 	}

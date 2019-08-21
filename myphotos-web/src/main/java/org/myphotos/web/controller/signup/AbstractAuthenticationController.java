@@ -31,7 +31,7 @@ abstract class AbstractAuthenticationController extends HttpServlet {
 		if (SecurityUtils.isAuthenticated()) {
 			router.redirectToAuthUrl(
 					"/sign-up",
-					() -> "/" + SecurityUtils.getAuthenticatedProfile().getUid(),
+					() -> "/" + SecurityUtils.getAuthenticatedUser().getUid(),
 					resp);
 		} else {
 			processAuthRequest(req, resp);

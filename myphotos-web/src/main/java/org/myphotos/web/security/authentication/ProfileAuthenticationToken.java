@@ -4,6 +4,7 @@ import static org.myphotos.web.security.SecurityUtils.TEMP_PASS;
 
 import org.apache.shiro.authc.RememberMeAuthenticationToken;
 import org.myphotos.domain.entity.Profile;
+import org.myphotos.web.security.model.AuthUser;
 
 /**
  * Used for permanent user authentication
@@ -14,14 +15,14 @@ import org.myphotos.domain.entity.Profile;
 public class ProfileAuthenticationToken implements RememberMeAuthenticationToken {
 	private static final long serialVersionUID = 1L;
 
-	private final Profile profile;
+	private final AuthUser profile;
 
 	public ProfileAuthenticationToken(Profile profile) {
-		this.profile = profile;
+		this.profile = new AuthUser(profile.getId(), profile.getUid(), profile.getEmail());
 	}
 
 	@Override
-	public Object getPrincipal() {
+	public AuthUser getPrincipal() {
 		return profile;
 	}
 

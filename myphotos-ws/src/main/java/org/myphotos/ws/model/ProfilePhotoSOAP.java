@@ -8,19 +8,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.myphotos.converter.ConvertAsAbsoluteURL;
 
 @XmlRootElement(name = "profilePhoto")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ProfilePhotoSOAP {
 
-	@XmlAttribute(required = true)
 	private Long id;
-	
-	@ConvertAsAbsoluteURL
 	private String smallUrl;
-	
 	private long views;
-	
 	private long downloads;
 
+	@XmlAttribute(required = true)
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +25,7 @@ public class ProfilePhotoSOAP {
 		this.id = id;
 	}
 
+	@ConvertAsAbsoluteURL
 	public String getSmallUrl() {
 		return smallUrl;
 	}

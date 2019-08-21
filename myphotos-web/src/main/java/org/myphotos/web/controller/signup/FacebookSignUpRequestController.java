@@ -28,7 +28,7 @@ public class FacebookSignUpRequestController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if (SecurityUtils.isAuthenticated()) {
-			router.redirectToAuthUrl("/sign-up", () -> "/" + SecurityUtils.getAuthenticatedProfile().getUid(), resp);
+			router.redirectToAuthUrl("/sign-up", () -> "/" + SecurityUtils.getAuthenticatedUser().getUid(), resp);
 		} else {
 			router.redirectToUrl(socialService.getAuthorizeUrl(), resp);
 		}

@@ -16,7 +16,7 @@ public class AccessTokenLifeCycleManager {
 	 * Can't use injection here because WildFly 10.1.0 can't provide injection
 	 * support for injection CDI managed beans into entity lifecycle listeners.
 	 */
-	private Logger logger = Logger.getLogger(AccessTokenLifeCycleManager.class.getName());
+	private final Logger logger = Logger.getLogger(AccessTokenLifeCycleManager.class.getName());
 
 	@PrePersist
 	public void setToken(AccessToken model) {

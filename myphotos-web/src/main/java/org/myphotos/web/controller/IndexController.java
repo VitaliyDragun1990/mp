@@ -71,6 +71,9 @@ public class IndexController extends HttpServlet {
 		req.setAttribute("photos", photos);
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("sortMode", sortMode.name().toLowerCase());
+		if (SecurityUtils.isAuthenticated()) {
+			req.setAttribute("profile", profileService.findById(SecurityUtils.getAuthenticatedUser().getId()));
+		}
 
 		router.forwardToPage("home", req, resp);
 	}

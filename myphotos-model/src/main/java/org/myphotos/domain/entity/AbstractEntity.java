@@ -16,12 +16,12 @@ import org.myphotos.validation.PastTime;
 public abstract class AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private LocalDateTime created;
+	
 	@NotNull
 	@PastTime
 	@Convert(converter = LocalDateTimeConverter.class)
 	@Column(nullable = false, updatable = false)
-	private LocalDateTime created;
-	
 	public LocalDateTime getCreated() {
 		return created;
 	}

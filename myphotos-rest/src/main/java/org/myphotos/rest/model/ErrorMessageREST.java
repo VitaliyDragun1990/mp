@@ -6,18 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ErrorMessage")
 public class ErrorMessageREST {
 
-	@ApiModelProperty(
-			required = true,
-			value = "Error message. Should be displayed to the user if userError=true,"
-					+ " otherwise it is message for the developer"
-			)
 	private String message;
-	
-	@ApiModelProperty(
-			required = true,
-			value = "Category of the error message. If userError=true, message should be displayed to the user,"
-					+ " otherwise it is message for the developer"
-			)
 	private boolean userError;
 	
 	public ErrorMessageREST() {
@@ -32,6 +21,11 @@ public class ErrorMessageREST {
 		this.userError = userError;
 	}
 
+	@ApiModelProperty(
+			required = true,
+			value = "Error message. Should be displayed to the user if userError=true,"
+					+ " otherwise it is message for the developer"
+			)
 	public String getMessage() {
 		return message;
 	}
@@ -40,6 +34,11 @@ public class ErrorMessageREST {
 		this.message = message;
 	}
 
+	@ApiModelProperty(
+			required = true,
+			value = "Category of the error message. If userError=true, message should be displayed to the user,"
+					+ " otherwise it is message for the developer"
+			)
 	public boolean isUserError() {
 		return userError;
 	}

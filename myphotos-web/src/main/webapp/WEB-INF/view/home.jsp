@@ -7,9 +7,9 @@
 <header id="header">
 	<div class="inner">
 		<shiro:authenticated>
-			<c:set var="currentAccountAvatarUrl"><shiro:principal property="avatarUrl"/></c:set>
-			<c:set var="currentAccountFullName"><shiro:principal property="fullName"/></c:set>
-			<c:set var="currentAccountUidUrl">/<shiro:principal property="uid"/></c:set>
+			<c:set var="currentAccountAvatarUrl">${profile.avatarUrl}</c:set>
+			<c:set var="currentAccountFullName">${profile.fullName}</c:set>
+			<c:set var="currentAccountUidUrl">/${profile.uid}</c:set>
 			<a href="javascript:void();" class="image avatar">
 				<img src="${currentAccountAvatarUrl}" alt="${currentAccountFullName}" />
 			</a>

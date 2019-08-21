@@ -11,25 +11,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("Profile")
 public class ProfileREST extends SimpleProfileREST {
 
-	@ApiModelProperty(required = true)
 	protected String firstName;
-
-	@ApiModelProperty(required = true)
 	protected String lastName;
-
-	@ConvertAsAbsoluteURL
-	@ApiModelProperty(required = true)
 	protected String avatarUrl;
-
-	@ApiModelProperty(required = true)
 	protected String jobTitle;
-
-	@ApiModelProperty(required = true)
 	protected String location;
-
-	@ApiModelProperty(required = true)
 	private int photoCount;
 
+	@ApiModelProperty(required = true)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -38,6 +27,7 @@ public class ProfileREST extends SimpleProfileREST {
 		this.firstName = firstName;
 	}
 
+	@ApiModelProperty(required = true)
 	public String getLastName() {
 		return lastName;
 	}
@@ -46,6 +36,8 @@ public class ProfileREST extends SimpleProfileREST {
 		this.lastName = lastName;
 	}
 
+	@ApiModelProperty(required = true)
+	@ConvertAsAbsoluteURL
 	public String getAvatarUrl() {
 		return avatarUrl;
 	}
@@ -54,6 +46,7 @@ public class ProfileREST extends SimpleProfileREST {
 		this.avatarUrl = avatarUrl;
 	}
 
+	@ApiModelProperty(required = true)
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -62,6 +55,7 @@ public class ProfileREST extends SimpleProfileREST {
 		this.jobTitle = jobTitle;
 	}
 
+	@ApiModelProperty(required = true)
 	public String getLocation() {
 		return location;
 	}
@@ -70,6 +64,7 @@ public class ProfileREST extends SimpleProfileREST {
 		this.location = lcoation;
 	}
 
+	@ApiModelProperty(required = true)
 	public int getPhotoCount() {
 		return photoCount;
 	}

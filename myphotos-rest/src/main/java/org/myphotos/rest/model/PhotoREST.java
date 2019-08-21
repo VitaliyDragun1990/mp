@@ -9,9 +9,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("Photo")
 public class PhotoREST extends ProfilePhotoREST {
 
-	@ApiModelProperty(required = true)
 	private ProfileREST profile;
 
+	@ApiModelProperty(required = true)
 	public ProfileREST getProfile() {
 		return profile;
 	}

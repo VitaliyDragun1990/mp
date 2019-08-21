@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -29,64 +30,43 @@ import org.myphotos.validation.EnglishLanguage;
 public class Profile extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+	private String uid;
+	private String avatarUrl;
+	private String email;
+	private String firstName;
+	private String lastName;
+	private String jobTitle;
+	private String location;
+	private int photoCount;
+	private int rating;
+
 	@Id
 	@Column(unique = true, nullable = false, updatable = false)
 	@SequenceGenerator(name = "PROFILE_ID_GENERATOR", sequenceName = "PROFILE_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFILE_ID_GENERATOR")
-	private Long id;
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	@NotNull
 	@Size(max = 255)
 	@Column(unique = true, nullable = false, length = 255, updatable = false)
-	private String uid;
+	public String getUid() {
+		return uid;
+	}
+	
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
 	@NotNull
 	@Size(max = 255)
 	@Column(name = "avatar_url", nullable = false, length = 255)
-	private String avatarUrl;
-
-	@NotNull
-	@Email
-	@Size(max = 100)
-	@Column(unique = true, nullable = false, length = 100, updatable = false)
-	private String email;
-
-	@NotNull(message = "{Profile.firstName.NotNull}")
-	@Size(min = 1, max = 60, message = "{Profile.firstName.Size}")
-	@EnglishLanguage(withNumbers = false, withSpecSymbols = false)
-	@Column(name = "first_name", nullable = false, length = 60)
-	private String firstName;
-
-	@NotNull(message = "{Profile.lastName.NotNull}")
-	@Size(min = 1, max = 60, message = "{Profile.lastName.Size}")
-	@EnglishLanguage(withNumbers = false, withSpecSymbols = false)
-	@Column(name = "last_name", nullable = false, length = 60)
-	private String lastName;
-	
-	@NotNull(message = "{Profile.jobTitle.NotNull}")
-	@Size(min = 5, max = 100, message = "{Profile.jobTitle.Size}")
-	@EnglishLanguage(withSpecSymbols = false)
-	@Column(name = "job_title", nullable = false, length = 100)
-	private String jobTitle;
-
-	@NotNull(message = "{Profile.location.NotNull}")
-	@Size(min = 5, max = 100, message = "{Profile.location.Size}")
-	@EnglishLanguage(withSpecSymbols = false)
-	@Column(nullable = false, length = 100)
-	private String location;
-
-	@Min(0)
-	@Column(name = "photo_count", nullable = false)
-	private int photoCount;
-
-	@Min(0)
-	@Column(nullable = false)
-	private int rating;
-
-	public Long getId() {
-		return id;
-	}
-
 	public String getAvatarUrl() {
 		return avatarUrl;
 	}
@@ -95,6 +75,10 @@ public class Profile extends AbstractEntity {
 		this.avatarUrl = avatarUrl;
 	}
 
+	@NotNull
+	@Email
+	@Size(max = 100)
+	@Column(unique = true, nullable = false, length = 100, updatable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -103,6 +87,10 @@ public class Profile extends AbstractEntity {
 		this.email = email;
 	}
 
+	@NotNull
+	@Size(min = 1, max = 60)
+	@EnglishLanguage(withNumbers = false, withSpecSymbols = false)
+	@Column(name = "first_name", nullable = false, length = 60)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -111,10 +99,27 @@ public class Profile extends AbstractEntity {
 		this.firstName = firstName;
 	}
 	
+	@NotNull
+	@Size(min = 1, max = 60)
+	@EnglishLanguage(withNumbers = false, withSpecSymbols = false)
+	@Column(name = "last_name", nullable = false, length = 60)
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	@Transient
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
 
+	@NotNull
+	@Size(min = 5, max = 100)
+	@EnglishLanguage(withSpecSymbols = false)
+	@Column(name = "job_title", nullable = false, length = 100)
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -123,14 +128,10 @@ public class Profile extends AbstractEntity {
 		this.jobTitle = jobTitle;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+	@NotNull
+	@Size(min = 5, max = 100)
+	@EnglishLanguage(withSpecSymbols = false)
+	@Column(nullable = false, length = 100)
 	public String getLocation() {
 		return location;
 	}
@@ -139,6 +140,8 @@ public class Profile extends AbstractEntity {
 		this.location = location;
 	}
 
+	@Min(0)
+	@Column(name = "photo_count", nullable = false)
 	public int getPhotoCount() {
 		return photoCount;
 	}
@@ -147,6 +150,8 @@ public class Profile extends AbstractEntity {
 		this.photoCount = photoCount;
 	}
 
+	@Min(0)
+	@Column(nullable = false)
 	public int getRating() {
 		return rating;
 	}
@@ -154,17 +159,4 @@ public class Profile extends AbstractEntity {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 }

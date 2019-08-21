@@ -1,11 +1,9 @@
 package org.myphotos.converter;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -92,33 +90,13 @@ class DefaultModelConverter implements ModelConverter {
 		Class<?> resultPropertyClass = propertyUtils.getPropertyType(result, propertyName);
 		if (resultPropertyClass.isPrimitive() || propertyValue.getClass().isPrimitive()) {
 			return propertyValue;
-		} else if (isConvertAsAbsoluteUrlPresent(result, propertyName)) {
+		} else if (ConverterUtils.isAnnotationPresent(ConvertAsAbsoluteURL.class, result, propertyName)) {
 			return urlConverter.convert(String.valueOf(propertyValue));
 		} else if (propertyValue.getClass() != resultPropertyClass) {
 			return convert(propertyValue, resultPropertyClass);
 		}
 
 		return propertyValue;
-	}
-
-	private <D> boolean isConvertAsAbsoluteUrlPresent(D result, String propertyName) {
-		Class<?> cl = result.getClass();
-		Optional<Field> field = findField(cl, propertyName);
-
-		return field.isPresent() && field.get().isAnnotationPresent(ConvertAsAbsoluteURL.class);
-	}
-
-	private Optional<Field> findField(Class<?> clazz, String fieldName) {
-		Field field = null;
-		while (clazz != null) {
-			try {
-				field = clazz.getDeclaredField(fieldName);
-			} catch (NoSuchFieldException e) {
-				// do nothing
-			}
-			clazz = clazz.getSuperclass();
-		}
-		return Optional.ofNullable(field);
 	}
 
 	private static void checkParams(Object source, Class<?> destinationClass) {

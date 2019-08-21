@@ -29,7 +29,7 @@ public class SaveProfileController extends AbstractSaveProfileController {
 
 	@Override
 	protected Profile getCurrentProfile(HttpServletRequest req) {
-		return SecurityUtils.getAuthenticatedProfile();
+		return profileService.findById(SecurityUtils.getAuthenticatedUser().getId());
 	}
 
 	@Override

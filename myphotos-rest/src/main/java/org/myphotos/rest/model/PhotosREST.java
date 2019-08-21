@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("Photos")
 public class PhotosREST {
 
-	@ApiModelProperty(required = true, value = "Photo list")
 	private List<? extends ProfilePhotoREST> photos;
-
-	@ApiModelProperty(required = false, value = "Total photo count")
 	private Long total;
 
 	public PhotosREST() {
@@ -24,6 +21,7 @@ public class PhotosREST {
 		this.photos = photos;
 	}
 
+	@ApiModelProperty(required = true, value = "Photo list")
 	public List<? extends ProfilePhotoREST> getPhotos() {
 		return photos;
 	}
@@ -32,6 +30,7 @@ public class PhotosREST {
 		this.photos = photos;
 	}
 
+	@ApiModelProperty(required = false, value = "Total photo count")
 	public Long getTotal() {
 		return total;
 	}

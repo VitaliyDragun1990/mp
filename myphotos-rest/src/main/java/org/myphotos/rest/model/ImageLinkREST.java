@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ImageLink")
 public class ImageLinkREST {
 
-	@ApiModelProperty(required = true)
 	private String url;
 
 	public ImageLinkREST() {
@@ -19,6 +18,7 @@ public class ImageLinkREST {
 		this.url = url;
 	}
 
+	@ApiModelProperty(required = true)
 	public String getUrl() {
 		return url;
 	}

@@ -8,10 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ValidationItem")
 public class ValidationItemREST {
 
-	@ApiModelProperty(required = true, value = "Property name")
 	private String field;
-
-	@ApiModelProperty(required = true, value = "List of error messages for particular property")
 	private List<String> messages;
 
 	public ValidationItemREST() {
@@ -22,6 +19,7 @@ public class ValidationItemREST {
 		this.messages = messages;
 	}
 
+	@ApiModelProperty(required = true, value = "Property name")
 	public String getField() {
 		return field;
 	}
@@ -30,6 +28,7 @@ public class ValidationItemREST {
 		this.field = field;
 	}
 
+	@ApiModelProperty(required = true, value = "List of error messages for particular property")
 	public List<String> getMessages() {
 		return messages;
 	}

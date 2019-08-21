@@ -5,6 +5,7 @@ import org.myphotos.domain.entity.Profile;
 import org.myphotos.web.security.authentication.ProfileAuthenticationToken;
 import org.myphotos.web.security.authentication.TempAuthenticationToken;
 import org.myphotos.web.security.exception.AuthenticationException;
+import org.myphotos.web.security.model.AuthUser;
 
 /**
  * Static utility methods to provide user authentication in explicit way.
@@ -69,10 +70,10 @@ public class SecurityUtils {
 	 * 
 	 * @throws AuthenticationException if current user is not authenticated
 	 */
-	public static Profile getAuthenticatedProfile() {
+	public static AuthUser getAuthenticatedUser() {
 		Subject currentSubject = org.apache.shiro.SecurityUtils.getSubject();
 		if (currentSubject.isAuthenticated()) {
-			return (Profile) currentSubject.getPrincipal();
+			return (AuthUser) currentSubject.getPrincipal();
 		} else {
 			throw new AuthenticationException("Current user is not authenticated");
 		}

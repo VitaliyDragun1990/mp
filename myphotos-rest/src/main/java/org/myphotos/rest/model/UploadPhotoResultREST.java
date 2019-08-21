@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("UploadPhotoResult")
 public class UploadPhotoResultREST extends ImageLinkREST {
 
-	@ApiModelProperty(required = true, value = "Id of the uploaded photo")
 	private Long id;
 
 	public UploadPhotoResultREST(Long id, String url) {
@@ -20,6 +19,7 @@ public class UploadPhotoResultREST extends ImageLinkREST {
 	public UploadPhotoResultREST() {
 	}
 
+	@ApiModelProperty(required = true, value = "Id of the uploaded photo")
 	public Long getId() {
 		return id;
 	}

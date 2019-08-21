@@ -28,13 +28,18 @@ public class JPAQueryRegistrar {
 	public void registerNamedQueries(Map<String, String> namedQueriesMap) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		logger.log(Level.INFO, "Registering {0} named JPQL queries...", namedQueriesMap.size());
+		
 		try {
-			for (Map.Entry<String, String> entry : namedQueriesMap.entrySet()) {
-				registerNamedQuery(em, entry.getKey(), entry.getValue());
-			}
+			registerNamedQueries(namedQueriesMap, em);
 			logger.log(Level.INFO, "{0} named JPQL queries have been registered successfully", namedQueriesMap.size());
 		} finally {
 			em.close();
+		}
+	}
+
+	private void registerNamedQueries(Map<String, String> namedQueriesMap, EntityManager em) {
+		for (Map.Entry<String, String> entry : namedQueriesMap.entrySet()) {
+			registerNamedQuery(em, entry.getKey(), entry.getValue());
 		}
 	}
 

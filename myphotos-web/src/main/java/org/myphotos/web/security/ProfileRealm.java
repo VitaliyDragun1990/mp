@@ -14,6 +14,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.myphotos.domain.entity.Profile;
 import org.myphotos.web.security.authentication.ProfileAuthenticationToken;
+import org.myphotos.web.security.model.AuthUser;
 
 public class ProfileRealm extends AuthorizingRealm {
 
@@ -24,7 +25,7 @@ public class ProfileRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		if (principals.getPrimaryPrincipal() instanceof Profile) {
+		if (principals.getPrimaryPrincipal() instanceof AuthUser) {
 			return new SimpleAuthorizationInfo(Collections.singleton(PROFILE_ROLE));
 		} else {
 			return null;
@@ -40,7 +41,7 @@ public class ProfileRealm extends AuthorizingRealm {
 	@Override
 	protected Object getAvailablePrincipal(PrincipalCollection principals) {
 		Object principal = super.getAvailablePrincipal(principals);
-		if (principal instanceof Profile) {
+		if (principal instanceof AuthUser) {
 			return ((Profile)principal).getEmail();
 		}
 		return principal;

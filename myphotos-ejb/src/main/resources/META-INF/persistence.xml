@@ -20,7 +20,7 @@
 			<property name="eclipselink.logging.level.sql" value="FINE"/>		
 			<property name="eclipselink.logging.parameters" value="true"/>
 			<property name="eclipselink.target-server" value="Glassfish"/>
-<!-- 			<property name="eclipselink.weaving" value="false"/> -->
+			<!-- <property name="eclipselink.weaving" value="false"/> -->
 
 			<!-- openjpa properties (TomEE) -->
 			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>

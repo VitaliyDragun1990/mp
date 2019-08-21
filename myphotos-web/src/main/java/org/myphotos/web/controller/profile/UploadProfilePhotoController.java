@@ -26,7 +26,6 @@ import org.myphotos.domain.model.Pageable;
 import org.myphotos.domain.service.PhotoService;
 import org.myphotos.web.model.MultipartImageResource;
 import org.myphotos.web.router.Router;
-import org.myphotos.web.security.SecurityUtils;
 
 @WebServlet(urlPatterns = "/upload-photos", asyncSupported = true, loadOnStartup = 1)
 @MultipartConfig(maxFileSize = MAX_UPLOADED_PHOTO_SIZE_IN_BYTES)
@@ -40,7 +39,7 @@ public class UploadProfilePhotoController extends AbstractUploadController<Photo
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Profile profile = SecurityUtils.getAuthenticatedProfile();
+		Profile profile = getCurrentProfile();
 		List<Photo> photos = photoService.findProfilePhotos(
 				profile.getId(),
 				Pageable.of(1, PHOTO_LIMIT - 1) // PHOTO_LIMIT - 1 because we need room on page to place 'upload a file' template

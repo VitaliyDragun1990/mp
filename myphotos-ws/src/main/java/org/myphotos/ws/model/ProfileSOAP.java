@@ -12,31 +12,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.myphotos.converter.ConvertAsAbsoluteURL;
 
 @XmlRootElement(name = "profile")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ProfileSOAP {
 
-	@XmlAttribute(required = true)
 	private Long id;
-
 	private String uid;
-
 	private String firstName;
-
 	private String lastName;
-
-	@ConvertAsAbsoluteURL
 	private String avatarUrl;
-
 	private String jobTitle;
-
 	private String location;
-
 	private int photoCount;
-
-	@XmlElementWrapper(name = "photos")
-	@XmlElement(name = "photo")
 	private List<ProfilePhotoSOAP> photos;
 
+	@XmlAttribute(required = true)
 	public Long getId() {
 		return id;
 	}
@@ -69,6 +58,7 @@ public class ProfileSOAP {
 		this.lastName = lastName;
 	}
 
+	@ConvertAsAbsoluteURL
 	public String getAvatarUrl() {
 		return avatarUrl;
 	}
@@ -101,6 +91,8 @@ public class ProfileSOAP {
 		this.photoCount = photoCount;
 	}
 
+	@XmlElementWrapper(name = "photos")
+	@XmlElement(name = "photo")
 	public List<ProfilePhotoSOAP> getPhotos() {
 		return photos;
 	}

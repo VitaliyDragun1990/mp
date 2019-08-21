@@ -9,16 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("SimpleProfile")
 public class SimpleProfileREST {
 
-	@ApiModelProperty(required = true, value = "Profile id. Used as unique identifier to distinguish profiles via REST API")
 	private Long id;
-	
-	@ApiModelProperty(
-			required = true,
-			value = "Profile uid. Can be useflul if user wants to search for particular profile."
-					+ "For examle via browser profile unique url will be http://myphotos.com/${uid}"
-			)
 	private String uid;
 
+	@ApiModelProperty(required = true, value = "Profile id. Used as unique identifier to distinguish profiles via REST API")
 	public Long getId() {
 		return id;
 	}
@@ -27,6 +21,11 @@ public class SimpleProfileREST {
 		this.id = id;
 	}
 
+	@ApiModelProperty(
+			required = true,
+			value = "Profile uid. Can be useflul if user wants to search for particular profile."
+					+ "For examle via browser profile unique url will be http://myphotos.com/${uid}"
+			)
 	public String getUid() {
 		return uid;
 	}

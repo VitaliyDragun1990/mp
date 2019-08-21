@@ -11,19 +11,12 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ProfilePhoto")
 public class ProfilePhotoREST {
 
-	@ApiModelProperty(required = true, value = "Id of the photo. Used as unique identifier for /preview and /download API")
 	private Long id;
-
-	@ConvertAsAbsoluteURL
-	@ApiModelProperty(required = true)
 	private String smallUrl;
-
-	@ApiModelProperty(required = true)
 	private long views;
-
-	@ApiModelProperty(required = true)
 	private long downloads;
 
+	@ApiModelProperty(required = true, value = "Id of the photo. Used as unique identifier for /preview and /download API")
 	public Long getId() {
 		return id;
 	}
@@ -32,6 +25,8 @@ public class ProfilePhotoREST {
 		this.id = id;
 	}
 
+	@ApiModelProperty(required = true)
+	@ConvertAsAbsoluteURL
 	public String getSmallUrl() {
 		return smallUrl;
 	}
@@ -40,6 +35,7 @@ public class ProfilePhotoREST {
 		this.smallUrl = smallUrl;
 	}
 
+	@ApiModelProperty(required = true)
 	public long getViews() {
 		return views;
 	}
@@ -48,6 +44,7 @@ public class ProfilePhotoREST {
 		this.views = views;
 	}
 
+	@ApiModelProperty(required = true)
 	public long getDownloads() {
 		return downloads;
 	}

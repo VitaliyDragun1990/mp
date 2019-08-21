@@ -23,7 +23,6 @@ import org.myphotos.infra.exception.business.ObjectNotFoundException;
 import org.myphotos.infra.repository.ProfileRepository;
 import org.myphotos.infra.util.CommonUtils;
 import org.myphotos.media.ImageService;
-import org.myphotos.media.model.ImageCategory;
 import org.myphotos.media.model.URLImageResource;
 import org.myphotos.rmi.model.RemoteProfile;
 import org.myphotos.rmi.service.RemoteProfileService;
@@ -113,17 +112,21 @@ public class ProfileServiceBean implements ProfileService, RemoteProfileService 
 	}
 
 	private void saveNewAvatar(Profile profile, String avatarUrl) {
-		if (isProfileAvatarNotPlaceholder(profile.getAvatarUrl())) {
-			imageService.removeImage(profile.getAvatarUrl());
-		}
+//		deleteOldAvatarIfExists(profile);
 		profile.setAvatarUrl(avatarUrl);
 		profileRepository.update(profile);
 	}
 
-	private boolean isProfileAvatarNotPlaceholder(String avatarUrl) {
-		return ImageCategory.isImageCategoryUrl(avatarUrl);
-	}
-	
+	/*
+	 * private void deleteOldAvatarIfExists(Profile profile) { if
+	 * (isProfileAvatarNotPlaceholder(profile.getAvatarUrl())) {
+	 * imageService.removeImage(profile.getAvatarUrl()); } }
+	 */
+
+	/*
+	 * private boolean isProfileAvatarNotPlaceholder(String avatarUrl) { return
+	 * ImageCategory.isImageCategoryUrl(avatarUrl); }
+	 */
 	public void setAvatarPlaceholder(Long profileId) {
 		Optional<Profile> profile = profileRepository.findById(profileId);
 		if (profile.isPresent()) {

@@ -11,9 +11,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("ProfileWithPhotos")
 public class ProfileWithPhotosREST extends ProfileREST {
 
-	@ApiModelProperty(required = true, value = "Photo list")
 	private List<? extends ProfilePhotoREST> photos;
 
+	@ApiModelProperty(required = true, value = "Photo list")
 	public List<? extends ProfilePhotoREST> getPhotos() {
 		return photos;
 	}

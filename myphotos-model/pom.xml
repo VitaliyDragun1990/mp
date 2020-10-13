@@ -16,7 +16,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<common-text.version>1.6</common-text.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<hamcrest.version>2.1</hamcrest.version>
 		<mockito.version>2.13.0</mockito.version>
 	</properties>

@@ -20,7 +20,7 @@
 		<restfb.version>2.20.0</restfb.version>
 		<google-api-client.version>1.22.0</google-api-client.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<hamcrest.version>2.1</hamcrest.version>
 		<mockito.version>2.13.0</mockito.version>
 	</properties>
